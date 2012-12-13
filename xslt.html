@@ -1,0 +1,103 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>XSLT Online Realtime Transformer</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<style>
+html,body{width:100%;height:100%;font-family:verdana;}
+html,body,textarea,h1{margin:0;padding:0;}
+h1{color:lightgray;text-align:right;position:absolute;z-index:-1;font-size:56px;right:10px;}
+.ui-resizable-se{bottom:23px;right:5px;}
+.ui-wrapper{float:left;}
+textarea{width:32%;height:70%;font-family:courier;font-size:12px;background-color:transparent;}
+#container > div {padding:5px 0px 0px 5px;}
+#errorbar{float:left;clear:left;margin:5px;}
+#footer{position:fixed;bottom:4px;right:4px;text-align:center;font-size:10px;color:grey;}
+.disabled{color:lightgray;}
+.error{color:red;border:2px solid red;display:block;}
+</style>
+<script>
+//setup before functions
+var typingTimer;                //timer identifier
+var doneTypingInterval = 200;  //time in ms, 5 second for example
+$(document).ready(function() {
+	//on keyup, start the countdown
+	$('#xml, #xslt').keyup(function(){
+		clearTimeout(typingTimer);
+		typingTimer = setTimeout(doneTyping, doneTypingInterval);
+	});
+	$('#xml, #xslt').keydown(function(){
+		$("#output").addClass("disabled");
+	});
+	$("textarea").resizable({handles:"se"});
+	$("textarea").each(function(index,value){
+	    $(value).parent().prepend($("<h1>").html($(value).attr("id")));
+	});
+	doneTyping();
+});
+//user is "finished typing," do something
+var count = 0;
+function doneTyping(){
+	transform($("#xml"), $("#xslt"));
+	$("#output").removeClass("disabled");
+}
+function transform(xmlDom, xslDom){
+	if (document.implementation && document.implementation.createDocument) {
+	    $("#errorbar").html("");
+		var xml = parseXmlDocument(xmlDom);
+		var xsl = parseXmlDocument(xslDom);
+		xsltProcessor=new XSLTProcessor();
+		xsltProcessor.importStylesheet(xsl);
+		var resultDocument = xsltProcessor.transformToFragment(xml,document);
+		if (resultDocument != null){
+		    var tmp = document.createElement("div");
+		    tmp.appendChild(resultDocument);
+		    $("#output").val(tmp.innerHTML);
+		} else {
+		    $("#output").val("Error: resultDocument is null.");
+		}
+	} else {
+		$("#output").val("Cannot perform xslt transformation in this browser!");
+	}
+}
+function parseXmlDocument(xmlDom){
+    $(xmlDom).removeClass("error");
+    var doc = new DOMParser();
+	var xml = doc.parseFromString(xmlDom.val(),"text/xml");
+	var elems = xml.getElementsByTagName("parsererror");
+	if (elems.length>0) {
+	    $(xmlDom).addClass("error");
+        $("#errorbar").append(elems[0])
+    }
+    return xml;
+}
+</script>
+</head>
+<body>
+<div id="container">
+    <textarea id="xml">
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<bookstore>
+<book category="COOKING">
+	<title lang="en">Everyday Italian</title>
+	<author>Giada De Laurentiis</author>
+</book>
+</bookstore>
+    </textarea>
+    <textarea id="xslt">
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" version="1.0" encoding="iso-8859-1" indent="yes"/>
+<xsl:template match="/">
+  <div><h2><xsl:value-of select="//title" /></h2></div>
+</xsl:template>
+</xsl:stylesheet>
+    </textarea>
+    <textarea id="output"></textarea>
+</div>
+<div id="errorbar"></div>
+<div id="footer">Built for Firefox and Chrome.</div>
+</body>
+</html>
