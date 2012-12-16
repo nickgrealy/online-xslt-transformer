@@ -17,7 +17,7 @@ This section contains a list of prioritised features.
   * ability to save and load from file
   * HTML5 - store modifications in browser cache
   * store a setup based on a URL (like google maps or jsfiddle)
-  * XST Schema validation
+  * XSD Schema validation
   * Given, When, Then scenario
 
 ==Out of scope:==
