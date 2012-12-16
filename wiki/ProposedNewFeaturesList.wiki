@@ -14,6 +14,7 @@ A prioritised list of proposed new features.
 
 ==Nice to have:==
   * colour coded WYSIWYG editor
+  * autocomplete
   * ability to save and load from file
   * HTML5 - store modifications in browser cache
   * store a setup based on a URL (like google maps or jsfiddle)
