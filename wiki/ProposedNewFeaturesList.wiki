@@ -17,6 +17,8 @@ A prioritised list of proposed new features.
   * ability to save and load from file
   * HTML5 - store modifications in browser cache
   * store a setup based on a URL (like google maps or jsfiddle)
+  * XSD Schema validation
+  * Implment in the style - Given, When, Then scenario
 
 ==Out of scope:==
   * InternetExplorer support.
