@@ -1,0 +1,24 @@
+#summary A categorised list of new features.
+#labels Featured,Phase-Requirements
+
+= Introduction =
+
+This section contains a list of prioritised new features.
+
+
+= Details =
+
+==Required:==
+  * XSLT 2.0 support
+  * add line numbers (for error resolution - e.g. Error on line 8...)
+
+==Nice to have:==
+  * colour coded WYSIWYG editor
+  * ability to save and load from file
+  * HTML5 - store modifications in browser cache
+  * store a setup based on a URL (like google maps or jsfiddle)
+  * XST Schema validation
+  * Given, When, Then scenario
+
+==Out of scope:==
+  * InternetExplorer support.
