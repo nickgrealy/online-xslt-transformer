@@ -3,7 +3,7 @@
 
 = Introduction =
 
-This section contains a list of prioritised new features.
+This section contains a list of prioritised features.
 
 
 = Details =
