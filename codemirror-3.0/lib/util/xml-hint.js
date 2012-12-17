@@ -95,7 +95,7 @@
                 }
             }
 
-            element += getOpenTag(text);
+            element = getOpenTag(text);
         }
 
         return element;
