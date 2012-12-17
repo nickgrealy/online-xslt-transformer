@@ -5,44 +5,56 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	<!-- CodeMirror - http://codemirror.net/ -->
+    <link rel="stylesheet" href="codemirror-3.0/lib/codemirror.css">
+    <script src="codemirror-3.0/lib/codemirror.js"></script>
+    <script src="codemirror-3.0/mode/xml/xml.js"></script>
 <style>
 html,body{width:100%;height:100%;font-family:verdana;}
-html,body,textarea,h1{margin:0;padding:0;}
-h1{color:lightgray;text-align:right;position:absolute;z-index:-1;font-size:56px;right:24px;}
-.ui-resizable-se{bottom:23px;right:5px;}
+html,body,textarea,h1{margin:0;padding:5px;}
+h1{color:lightgrey;text-align:right;position:absolute;z-index:-1;font-size:56px;right:24px;}
+.ui-resizable-se{bottom:15px;right:1px;}
 .ui-wrapper{float:left;}
-textarea{width:32%;height:70%;font-family:courier;font-size:12px;background-color:transparent;}
+textarea{width:32%;height:70%;}
 #container > div {padding:5px 0px 0px 5px;}
 #errorbar{float:left;clear:left;margin:5px;}
 #footer{position:fixed;bottom:4px;right:4px;text-align:center;font-size:10px;color:grey;}
-.disabled{color:lightgray;}
-.error{color:red;border:2px solid red;display:block;}
+.error{color:red;}
+.CodeMirror{border:1px solid black;height:auto;}
+.CodeMirror-scroll{overflow-y:hidden;overflow-x:auto;}
 </style>
 <script>
 //setup before functions
 var typingTimer;                //timer identifier
 var doneTypingInterval = 200;  //time in ms, 5 second for example
+/* Object, containing references to the code mirror text areas, by id */
+var cm_config = {};
 $(document).ready(function() {
-	//on keyup, start the countdown
-	$('#xml, #xslt').keyup(function(){
-		clearTimeout(typingTimer);
-		typingTimer = setTimeout(doneTyping, doneTypingInterval);
-	});
-	$('#xml, #xslt').keydown(function(){
-		$("#output").addClass("disabled");
-	});
 	$("textarea").resizable({handles:"se"});
 	$("textarea").each(function(index,value){
+		var id = $(value).attr("id");
+		cm_config[id] = CodeMirror.fromTextArea($(value).get(0),{
+			mode:'text/xml',
+			lineNumbers:true,
+			onKeyEvent : function (editor, event) {
+				keyPressHandler(editor, $.event.fix(event));
+			}
+		});
 		$(value).attr("spellcheck","false");
-	    $(value).parent().prepend($("<h1>").html($(value).attr("id")));
+	    $(value).parent().prepend($("<h1>").html(id));
 	});
 	doneTyping();
 });
+function keyPressHandler(editor, event){
+	if (event.type == "keyup"){
+		clearTimeout(typingTimer);
+		typingTimer = setTimeout(doneTyping, doneTypingInterval);
+	}
+}
 //user is "finished typing," do something
 var count = 0;
 function doneTyping(){
-	transform($("#xml"), $("#xslt"));
-	$("#output").removeClass("disabled");
+	transform(cm_config.xml, cm_config.xslt);
 }
 function transform(xmlDom, xslDom){
 	if (document.implementation && document.implementation.createDocument) {
@@ -55,21 +67,22 @@ function transform(xmlDom, xslDom){
 		if (resultDocument != null){
 		    var tmp = document.createElement("div");
 		    tmp.appendChild(resultDocument);
-		    $("#output").val(tmp.innerHTML);
+		    cm_config.output.setValue(tmp.innerHTML);
 		} else {
-		    $("#output").val("Error: resultDocument is null.");
+		    cm_config.output.setValue("Error: resultDocument is null.");
+			$(cm_config.output.getWrapperElement()).addClass("error");
 		}
 	} else {
-		$("#output").val("Cannot perform xslt transformation in this browser!");
+		cm_config.output.val("Cannot perform xslt transformation in this browser!");
 	}
 }
 function parseXmlDocument(xmlDom){
-    $(xmlDom).removeClass("error");
+	$(cm_config.output.getWrapperElement()).removeClass("error");
     var doc = new DOMParser();
-	var xml = doc.parseFromString(xmlDom.val(),"text/xml");
+	var xml = doc.parseFromString(xmlDom.getValue(),"text/xml");
 	var elems = xml.getElementsByTagName("parsererror");
 	if (elems.length>0) {
-	    $(xmlDom).addClass("error");
+	    //$(xmlDom).addClass("error");
         $("#errorbar").append(elems[0])
     }
     return xml;
@@ -77,8 +90,9 @@ function parseXmlDocument(xmlDom){
 </script>
 </head>
 <body>
+Start typing in any of the boxes...
 <div id="container">
-    <textarea id="xml" autofocus="autofocus">
+<textarea id="xml" autofocus="autofocus">
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <bookstore>
 <book category="COOKING">
@@ -86,8 +100,8 @@ function parseXmlDocument(xmlDom){
 	<author>Giada De Laurentiis</author>
 </book>
 </bookstore>
-    </textarea>
-    <textarea id="xslt">
+</textarea>
+<textarea id="xslt">
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="xml" version="1.0" encoding="iso-8859-1" indent="yes"/>
@@ -95,8 +109,8 @@ function parseXmlDocument(xmlDom){
   <div><h2><xsl:value-of select="//title" /></h2></div>
 </xsl:template>
 </xsl:stylesheet>
-    </textarea>
-    <textarea id="output"></textarea>
+</textarea>
+<textarea id="output"></textarea>
 </div>
 <div id="errorbar"></div>
 <div id="footer">Built for Firefox and Chrome.</div>
