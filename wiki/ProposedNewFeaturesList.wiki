@@ -21,7 +21,9 @@ A prioritised list of proposed new features.
 ==Out of scope:==
   * InternetExplorer support.
 
-== Done ==
+---
+
+== Complete ==
   * add line numbers (for error resolution - e.g. Error on line 8...)
   * colour coded syntax highlighting
   * autocomplete
