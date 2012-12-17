@@ -5,6 +5,7 @@
 
 A prioritised list of proposed new features.
 
+----
 
 = Details =
 
