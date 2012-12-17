@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="codemirror-3.0/lib/codemirror.css">
     <script src="codemirror-3.0/lib/codemirror.js"></script>
     <script src="codemirror-3.0/mode/xml/xml.js"></script>
+	<script src="codemirror-3.0/lib/util/closetag.js"></script>
+    <script src="codemirror-3.0/lib/util/simple-hint.js"></script>
+    <link rel="stylesheet" href="codemirror-3.0/lib/util/simple-hint.css">
+    <script src="codemirror-3.0/lib/util/xml-hint.js"></script>
 <style>
 html,body{width:100%;height:100%;font-family:verdana;}
 html,body,textarea,h1{margin:0;padding:5px;}
@@ -30,12 +34,63 @@ var doneTypingInterval = 200;  //time in ms, 5 second for example
 /* Object, containing references to the code mirror text areas, by id */
 var cm_config = {};
 $(document).ready(function() {
+
+	CodeMirror.xmlHints['<'] = [
+		'xsl:apply-imports',
+		'xsl:apply-templates',
+		'xsl:attribute',
+		'xsl:attribute-set',
+		'xsl:call-template',
+		'xsl:choose',
+		'xsl:comment',
+		'xsl:copy',
+		'xsl:copy-of',
+		'xsl:decimal-format',
+		'xsl:element',
+		'xsl:fallback',
+		'xsl:for-each',
+		'xsl:if',
+		'xsl:import',
+		'xsl:include',
+		'xsl:key',
+		'xsl:message',
+		'xsl:namespace-alias',
+		'xsl:number',
+		'xsl:otherwise',
+		'xsl:output',
+		'xsl:param',
+		'xsl:preserve-space',
+		'xsl:processing-instruction',
+		'xsl:sort',
+		'xsl:strip-space',
+		'xsl:stylesheet',
+		'xsl:template',
+		'xsl:text',
+		'xsl:transform',
+		'xsl:value-of',
+		'xsl:variable',
+		'xsl:when',
+		'xsl:with-param'
+	];
+
+	CodeMirror.xmlHints['<xsl:value-of '] = [
+		'select'
+	];
+	  
+	var xslKeys = {
+		"'<'": function(cm) { CodeMirror.xmlHint(cm, '<'); },
+		"Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
+	};
+				
 	$("textarea").resizable({handles:"se"});
 	$("textarea").each(function(index,value){
 		var id = $(value).attr("id");
+		var extraKeyz = (id == "xslt" ? xslKeys : null);
 		cm_config[id] = CodeMirror.fromTextArea($(value).get(0),{
 			mode:'text/xml',
 			lineNumbers:true,
+            extraKeys: extraKeyz,
+			autoCloseTags:true,
 			onKeyEvent : function (editor, event) {
 				keyPressHandler(editor, $.event.fix(event));
 			}
@@ -96,8 +151,8 @@ Start typing in any of the boxes...
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <bookstore>
 <book category="COOKING">
-	<title lang="en">Everyday Italian</title>
-	<author>Giada De Laurentiis</author>
+  <title lang="en">Everyday Italian</title>
+  <author>Giada De Laurentiis</author>
 </book>
 </bookstore>
 </textarea>
