@@ -12,7 +12,6 @@ A prioritised list of proposed new features.
   * XSLT 2.0 support
 
 ==Nice to have:==
-  * autocomplete
   * ability to save and load from file
   * HTML5 - store modifications in browser cache
   * store a setup based on a URL (like google maps or jsfiddle)
@@ -25,3 +24,4 @@ A prioritised list of proposed new features.
 == Done ==
   * add line numbers (for error resolution - e.g. Error on line 8...)
   * colour coded syntax highlighting
+  * autocomplete
