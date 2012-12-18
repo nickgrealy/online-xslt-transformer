@@ -1,0 +1,9 @@
+Currently Saxon-CE is issued as a beta release under the terms of an evaluation license.
+
+Commercial licensing terms will be announced in due course. It is intended that pricing will be very affordable, especially for non-commercial use, but the product will not be open source. Licensing is on a "per-domain" basis, and entitles the developer of a web site to use Saxon-CE in the construction of that site, with implicit permission for all visitors to the site to download the software when they visit HTML pages that require it.
+
+Some open source components have been used in the construction of Saxon-CE. All of these are issued under licenses (BSD-style, Apache, or Mozilla) that permit use in a commercial product licensed under commercial terms. Some of these licenses require notices to be included in any software distribution: this requirement will be addressed when the product is fully released. Saxonica will also comply with any third-party requirements to release details of modifications made to source code.
+
+Most of the code in Saxon-CE is derived directly from Saxon-HE code (largely by selective removal). The original Saxon-HE code is available under an open source license. Saxonica owns the copyright to most of this code, and is therefore free to reissue derived code under a different license. Where there is code to which Saxonica does not own the copyright, Saxonica will respect all the terms of the licenses under which it is using the code in question.
+
+The beta release of the software is issued under terms and conditions that permit usage only for evaluation of the technology and not for production use. The software at this stage is not thoroughly tested, and is designed to expire 90 days after registration
