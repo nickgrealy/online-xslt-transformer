@@ -36,47 +36,43 @@ var cm_config = {};
 $(document).ready(function() {
 
 	CodeMirror.xmlHints['<'] = [
-		'xsl:apply-imports',
-		'xsl:apply-templates',
-		'xsl:attribute',
-		'xsl:attribute-set',
-		'xsl:call-template',
-		'xsl:choose',
-		'xsl:comment',
-		'xsl:copy',
-		'xsl:copy-of',
-		'xsl:decimal-format',
-		'xsl:element',
-		'xsl:fallback',
-		'xsl:for-each',
-		'xsl:if',
-		'xsl:import',
-		'xsl:include',
-		'xsl:key',
-		'xsl:message',
-		'xsl:namespace-alias',
-		'xsl:number',
-		'xsl:otherwise',
-		'xsl:output',
-		'xsl:param',
-		'xsl:preserve-space',
-		'xsl:processing-instruction',
-		'xsl:sort',
-		'xsl:strip-space',
-		'xsl:stylesheet',
-		'xsl:template',
-		'xsl:text',
-		'xsl:transform',
-		'xsl:value-of',
-		'xsl:variable',
-		'xsl:when',
-		'xsl:with-param'
+		'xsl:apply-imports', 'xsl:apply-templates', 'xsl:attribute', 'xsl:attribute-set', 'xsl:call-template', 'xsl:choose', 'xsl:comment', 'xsl:copy', 'xsl:copy-of',
+		'xsl:decimal-format', 'xsl:element', 'xsl:fallback', 'xsl:for-each', 'xsl:if', 'xsl:import', 'xsl:include', 'xsl:key', 'xsl:message', 'xsl:namespace-alias',
+		'xsl:number', 'xsl:otherwise', 'xsl:output', 'xsl:param', 'xsl:preserve-space', 'xsl:processing-instruction', 'xsl:sort', 'xsl:strip-space', 'xsl:stylesheet',
+		'xsl:template', 'xsl:text', 'xsl:transform', 'xsl:value-of', 'xsl:variable', 'xsl:when', 'xsl:with-param'
 	];
 
-	CodeMirror.xmlHints['<xsl:value-of '] = [
-		'select'
-	];
-	  
+	CodeMirror.xmlHints['<xsl:apply-templates '] = ['select=""','mode=""',];
+	CodeMirror.xmlHints['<xsl:attribute '] = ['name=""','namespace=""',];
+	CodeMirror.xmlHints['<xsl:attribute-set '] = ['name=""','use-attribute-sets=""',];
+	CodeMirror.xmlHints['<xsl:call-template '] = ['name=""',];
+	CodeMirror.xmlHints['<xsl:copy '] = ['use-attribute-sets=""',];
+	CodeMirror.xmlHints['<xsl:copy-of '] = ['select=""',];
+	CodeMirror.xmlHints['<xsl:decimal-format '] = ['name=""','decimal-separator=""','grouping-separator=""','infinity=""','minus-sign=""','NaN=""','percent=""','per-mille=""','zero-digit=""','digit=""','pattern-separator=""',];
+	CodeMirror.xmlHints['<xsl:element '] = ['name=""','namespace=""','use-attribute-sets=""',];
+	CodeMirror.xmlHints['<xsl:for-each '] = ['select=""',];
+	CodeMirror.xmlHints['<xsl:if '] = ['test=""',];
+	CodeMirror.xmlHints['<xsl:import '] = ['href=""',];
+	CodeMirror.xmlHints['<xsl:include '] = ['href=""',];
+	CodeMirror.xmlHints['<xsl:key '] = ['name=""','match=""','use=""',];
+	CodeMirror.xmlHints['<xsl:message '] = ['terminate=""',];
+	CodeMirror.xmlHints['<xsl:namespace-alias '] = ['stylesheet-prefix=""','result-prefix=""',];
+	CodeMirror.xmlHints['<xsl:number '] = ['count=""','level=""','from=""','value=""','format=""','lang=""','letter-value=""','grouping-separator=""','grouping-size=""',];
+	CodeMirror.xmlHints['<xsl:output '] = ['method=""','version=""','encoding=""','omit-xml-declaration=""','standalone=""','doctype-public=""','doctype-system=""','cdata-section-elements=""','indent=""','media-type=""',];
+	CodeMirror.xmlHints['<xsl:param '] = ['name=""','select=""',];
+	CodeMirror.xmlHints['<xsl:preserve-space '] = ['elements=""',];
+	CodeMirror.xmlHints['<xsl:processing-instruction '] = ['name=""',];
+	CodeMirror.xmlHints['<xsl:sort '] = ['select=""','lang=""','data-type=""','order=""','case-order=""',];
+	CodeMirror.xmlHints['<xsl:strip-space '] = ['elements=""',];
+	CodeMirror.xmlHints['<xsl:stylesheet '] = ['version=""','extension-element-prefixes=""','exclude-result-prefixes=""','id=""',];
+	CodeMirror.xmlHints['<xsl:template '] = ['name=""','match=""','mode=""','priority=""',];
+	CodeMirror.xmlHints['<xsl:text '] = ['disable-output-escaping=""',];
+	CodeMirror.xmlHints['<xsl:transform '] = ['version=""','extension-element-prefixes=""','exclude-result-prefixes=""','id=""',];
+	CodeMirror.xmlHints['<xsl:value-of '] = ['select=""','disable-output-escaping=""',];
+	CodeMirror.xmlHints['<xsl:variable '] = ['name=""','select=""',];
+	CodeMirror.xmlHints['<xsl:when '] = ['test=""',];
+	CodeMirror.xmlHints['<xsl:with-param '] = ['name=""','select=""',];
+	
 	var xslKeys = {
 		"'<'": function(cm) { CodeMirror.xmlHint(cm, '<'); },
 		"Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
@@ -100,12 +96,14 @@ $(document).ready(function() {
 	});
 	doneTyping();
 });
+
 function keyPressHandler(editor, event){
 	if (event.type == "keyup"){
 		clearTimeout(typingTimer);
 		typingTimer = setTimeout(doneTyping, doneTypingInterval);
 	}
 }
+
 //user is "finished typing," do something
 var count = 0;
 function doneTyping(){
