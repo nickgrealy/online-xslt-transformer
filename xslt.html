@@ -2,10 +2,11 @@
 <head>
     <meta charset="utf-8" />
     <title>XSLT Online Realtime Transformer</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-	<!-- CodeMirror - http://codemirror.net/ -->
+	<!-- jquery - http://jqueryui.com/ -->
+    <link rel="stylesheet" href="jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+    <script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js"></script>
+    <script src="jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<!-- codemirror - http://codemirror.net/ -->
     <link rel="stylesheet" href="codemirror-3.0/lib/codemirror.css">
     <script src="codemirror-3.0/lib/codemirror.js"></script>
     <script src="codemirror-3.0/mode/xml/xml.js"></script>
@@ -13,15 +14,18 @@
     <script src="codemirror-3.0/lib/util/simple-hint.js"></script>
     <link rel="stylesheet" href="codemirror-3.0/lib/util/simple-hint.css">
     <script src="codemirror-3.0/lib/util/xml-hint.js"></script>
+	<!-- saxonica - http://www.saxonica.com/ -->
+	<script src="saxon-ce-1.0/SaxonceDebug/Saxonce.nocache.js"></script>
 <style>
 html,body{width:100%;height:100%;font-family:verdana;}
-html,body,textarea,h1{margin:0;padding:5px;}
+html,body,textarea,h1{margin:0;padding:0;}
 h1{color:lightgrey;text-align:right;position:absolute;z-index:-1;font-size:56px;right:24px;}
 .ui-resizable-se{bottom:15px;right:1px;}
 .ui-wrapper{float:left;}
 textarea{width:32%;height:60%;}
-#container > div {padding:5px 0px 0px 5px;}
-#errorbar{float:left;clear:left;margin:5px;}
+#prompt{padding:10px 0px 0px 10px;}
+#container > div {padding:10px 0px 0px 10px;}
+#errorbar{float:left;clear:left;padding:10px;}
 #footer{position:fixed;bottom:4px;right:4px;text-align:center;font-size:10px;color:grey;}
 .error{color:red;}
 .CodeMirror{border:1px solid black;height:auto;}
@@ -94,8 +98,12 @@ $(document).ready(function() {
 		$(value).attr("spellcheck","false");
 	    $(value).parent().prepend($("<h1>").html(id));
 	});
-	doneTyping();
+	
 });
+
+var onSaxonLoad = function() {
+	doneTyping();
+}
 
 function keyPressHandler(editor, event){
 	if (event.type == "keyup"){
@@ -110,13 +118,14 @@ function doneTyping(){
 	transform(cm_config.xml, cm_config.xslt);
 }
 function transform(xmlDom, xslDom){
+	$(cm_config.output.getWrapperElement()).removeClass("error");
 	if (document.implementation && document.implementation.createDocument) {
 	    $("#errorbar").html("");
-		var xml = parseXmlDocument(xmlDom);
-		var xsl = parseXmlDocument(xslDom);
-		xsltProcessor=new XSLTProcessor();
-		xsltProcessor.importStylesheet(xsl);
-		var resultDocument = xsltProcessor.transformToFragment(xml,document);
+		Saxon.setErrorHandler(saxonErrorHandler);
+		var xml = Saxon.parseXML(xmlDom.getValue());
+		var xsl = Saxon.parseXML(xslDom.getValue());
+		var proc = Saxon.newXSLT20Processor(xsl);
+		var resultDocument = proc.transformToFragment(xml,document);
 		if (resultDocument != null){
 		    var tmp = document.createElement("div");
 		    tmp.appendChild(resultDocument);
@@ -126,41 +135,43 @@ function transform(xmlDom, xslDom){
 			$(cm_config.output.getWrapperElement()).addClass("error");
 		}
 	} else {
-		cm_config.output.val("Cannot perform xslt transformation in this browser!");
+		cm_config.output.setValue("Cannot perform xslt transformation in this browser!");
+		$(cm_config.output.getWrapperElement()).addClass("error");
 	}
 }
-function parseXmlDocument(xmlDom){
-	$(cm_config.output.getWrapperElement()).removeClass("error");
-    var doc = new DOMParser();
-	var xml = doc.parseFromString(xmlDom.getValue(),"text/xml");
-	var elems = xml.getElementsByTagName("parsererror");
-	if (elems.length>0) {
-	    //$(xmlDom).addClass("error");
-        $("#errorbar").append(elems[0])
-    }
-    return xml;
+function saxonErrorHandler(saxonError){
+	$("#errorbar").append("<hr/>").append(saxonError.message);
+	$("#errorbar").addClass("error");
 }
 </script>
 </head>
 <body>
-Start typing in any of the boxes...
+<div id="prompt">Start typing in any of the boxes...</div>
 <div id="container">
 <textarea id="xml" autofocus="autofocus">
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <bookstore>
-<book category="COOKING">
-  <title lang="en">Everyday Italian</title>
-  <author>Giada De Laurentiis</author>
-</book>
+  <book category="COOKING">
+    <title lang="en">Everyday Italian</title>
+    <author>Giada De Laurentiis</author>
+  </book>
 </bookstore>
 </textarea>
 <textarea id="xslt">
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output method="xml" version="1.0" encoding="iso-8859-1" indent="yes"/>
-<xsl:template match="/">
-  <div><h2><xsl:value-of select="//title" /></h2></div>
-</xsl:template>
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet
+  version="2.0"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:fn="http://www.w3.org/2005/xpath-functions">
+  <xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes"/>
+  <xsl:template match="/">
+    <div>
+      <h2>
+        <xsl:value-of select="fn:tokenize(//author,'\s')[3]" />
+      </h2>
+    </div>
+  </xsl:template>
 </xsl:stylesheet>
 </textarea>
 <textarea id="output"></textarea>
