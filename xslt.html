@@ -14,8 +14,6 @@
     <script src="codemirror-3.0/lib/util/simple-hint.js"></script>
     <link rel="stylesheet" href="codemirror-3.0/lib/util/simple-hint.css">
     <script src="codemirror-3.0/lib/util/xml-hint.js"></script>
-	<!-- saxonica - http://www.saxonica.com/ -->
-	<script src="saxon-ce-1.0/SaxonceDebug/Saxonce.nocache.js"></script>
 <style>
 html,body{width:100%;height:100%;font-family:verdana;}
 html,body,textarea,h1{margin:0;padding:0;}
@@ -98,12 +96,8 @@ $(document).ready(function() {
 		$(value).attr("spellcheck","false");
 	    $(value).parent().prepend($("<h1>").html(id));
 	});
-	
-});
-
-var onSaxonLoad = function() {
 	doneTyping();
-}
+});
 
 function keyPressHandler(editor, event){
 	if (event.type == "keyup"){
@@ -118,14 +112,13 @@ function doneTyping(){
 	transform(cm_config.xml, cm_config.xslt);
 }
 function transform(xmlDom, xslDom){
-	$(cm_config.output.getWrapperElement()).removeClass("error");
 	if (document.implementation && document.implementation.createDocument) {
 	    $("#errorbar").html("");
-		Saxon.setErrorHandler(saxonErrorHandler);
-		var xml = Saxon.parseXML(xmlDom.getValue());
-		var xsl = Saxon.parseXML(xslDom.getValue());
-		var proc = Saxon.newXSLT20Processor(xsl);
-		var resultDocument = proc.transformToFragment(xml,document);
+		var xml = parseXmlDocument(xmlDom);
+		var xsl = parseXmlDocument(xslDom);
+		xsltProcessor=new XSLTProcessor();
+		xsltProcessor.importStylesheet(xsl);
+		var resultDocument = xsltProcessor.transformToFragment(xml,document);
 		if (resultDocument != null){
 		    var tmp = document.createElement("div");
 		    tmp.appendChild(resultDocument);
@@ -136,12 +129,18 @@ function transform(xmlDom, xslDom){
 		}
 	} else {
 		cm_config.output.setValue("Cannot perform xslt transformation in this browser!");
-		$(cm_config.output.getWrapperElement()).addClass("error");
 	}
 }
-function saxonErrorHandler(saxonError){
-	$("#errorbar").append("<hr/>").append(saxonError.message);
-	$("#errorbar").addClass("error");
+function parseXmlDocument(xmlDom){
+	$(cm_config.output.getWrapperElement()).removeClass("error");
+    var doc = new DOMParser();
+	var xml = doc.parseFromString(xmlDom.getValue(),"text/xml");
+	var elems = xml.getElementsByTagName("parsererror");
+	if (elems.length>0) {
+	    //$(xmlDom).addClass("error");
+        $("#errorbar").append(elems[0])
+    }
+    return xml;
 }
 </script>
 </head>
@@ -166,11 +165,14 @@ function saxonErrorHandler(saxonError){
   xmlns:fn="http://www.w3.org/2005/xpath-functions">
   <xsl:output method="xml" version="1.0" encoding="utf-8" indent="yes"/>
   <xsl:template match="/">
-    <div>
-      <h2>
+    <ol>
+      <li>
+        <xsl:value-of select="//title" />
+      </li>
+      <li>
         <xsl:value-of select="fn:tokenize(//author,'\s')[3]" />
-      </h2>
-    </div>
+      </li>
+    </ol>
   </xsl:template>
 </xsl:stylesheet>
 </textarea>
