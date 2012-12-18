@@ -23,6 +23,15 @@
       var completions = result.list;
       function insert(str) {
         editor.replaceRange(str, result.from, result.to);
+		// if setting an attribute, set the cursor position inside the quotes
+		if (endsWith(str, '"')){
+			var pos = editor.getCursor();
+			pos.ch = pos.ch - 1;
+			editor.setCursor(pos);
+		}
+      }
+      function endsWith(str, suffix) {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
       }
       // When there is only one completion, use it directly.
       if (options.completeSingle && completions.length == 1) {
