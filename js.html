@@ -1,57 +1,49 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Javascript Online Realtime Evaluator</title>
-<script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js"></script>
+    <title>HTML,CSS and JS Online Realtime Transformer</title>
+    <script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js"></script>
 <script>
-var result = "";
-var lines = new Array();
-function splitXmlIntoLines(){
-	lines = $("#lines").val().split("\n");
-}
-function evalJsTextArea(){
-	eval($("#js").val());
-	$("#result").val(result);
-}
-$(document).ready(function() {
-	splitXmlIntoLines();
-	evalJsTextArea();
-	
-	$("#lines").keyup(function(){
-		splitXmlIntoLines();
-		evalJsTextArea();
-	});
-	
-	$("#js").keyup(function(){
-		evalJsTextArea();
-	});
-});
-
-</script>
-<style>
-  textarea{height:50%;width:33%;}
-</style>
+  function render(){
+	var html = "<style>"+$("#css").val()+"</style>"+$("#html").val();
+  	$('#target').html(html).contents();
+	eval($('#js').val());
+  }
+  $(document).ready(function(){
+  	$("#html").keyup(render);
+  	$("#css").keyup(render);
+  	$("#js").keyup(render);
+	render();
+  });
+  </script>
+  <style>
+  #target,textarea,table{width:100%;height:100%;}
+  #target{border:1px solid black;display:inline-block;}
+  </style>
 </head>
 <body>
-<textarea id="lines">
-This is your input
-data, it gets populated into 
-the "lines" variable (as a String Array).
-</textarea>
-<textarea id="js">
-// Here you can write any javascript. 
-// (Set the "result" variable to populate the output textarea)
-
-// Populate the result
-result = "";
-$.each(lines, function(i, line){
-    result += i + 1 + "> " + line + "?\n";
+<table>
+  <tr>
+	<td><textarea id="html">
+<b><i>Bold italics</i></b><br/>
+<input id="button" onclick="foobar()" type='button' value="Foobar" />
+<div id='test'>abc</div>
+</textarea></td>
+	<td><textarea id="css">
+b{color:blue;}
+i{text-decoration:underline;}
+</textarea></td>
+  </tr>
+  <tr>
+	<td><textarea id="js">
+var foobar = function() { alert('hello'); };
+$("#button").click(function(){
+  foobar();
 });
-
-// Modify this window
-$("#result").css("border","3px solid red");
-
-</textarea>
-<textarea id="result"></textarea>
-<body>
+$("#test").css("border","3px solid red");
+</textarea></td>
+	<td><div id="target"></div></td>
+  </tr>
+</table>
+</body>
 </html>
