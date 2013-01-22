@@ -7,7 +7,7 @@
 var result = "";
 var lines = new Array();
 function splitXmlIntoLines(){
-	lines = $("#xml").val().split("\n");
+	lines = $("#lines").val().split("\n");
 }
 function evalJsTextArea(){
 	eval($("#js").val());
@@ -17,7 +17,7 @@ $(document).ready(function() {
 	splitXmlIntoLines();
 	evalJsTextArea();
 	
-	$("#xml").keyup(function(){
+	$("#lines").keyup(function(){
 		splitXmlIntoLines();
 		evalJsTextArea();
 	});
@@ -33,17 +33,26 @@ $(document).ready(function() {
 </style>
 </head>
 <body>
-<textarea id="xml">
-one
-two
-three=four</textarea>
+<textarea id="lines">
+This is your input
+data, it gets populated into 
+the "lines" variable (as a String Array).
+</textarea>
 <textarea id="js">
+// Here you can write any javascript. 
+// (Set the "result" variable to populate the output textarea)
+
+// Populate the result
 result = "";
 $.each(lines, function(i, line){
   if (line != ""){
     result += i + "> " + line + "?\n";
   }
 });
+
+// Modify this window
+$("#result").css("border","3px solid red");
+
 </textarea>
 <textarea id="result"></textarea>
 <body>
