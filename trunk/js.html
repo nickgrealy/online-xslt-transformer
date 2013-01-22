@@ -45,9 +45,7 @@ the "lines" variable (as a String Array).
 // Populate the result
 result = "";
 $.each(lines, function(i, line){
-  if (line != ""){
-    result += i + "> " + line + "?\n";
-  }
+    result += i + 1 + "> " + line + "?\n";
 });
 
 // Modify this window
