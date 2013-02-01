@@ -1,5 +1,4 @@
-
-html,body,textarea{margin:0px;padding:0px;}
+html,body,textarea,frameset,frame{margin:0px;padding:0px;}
 
 textarea{
 background:transparent;
