@@ -32,24 +32,22 @@ $(document).ready(function(){
 function init(){
     // build frames and textareas...
 	if (typeof(Storage)!=="undefined"){
-		$('body').append($("<div>").addClass('toolbar').append($("<input>").attr('type','button').val('Clear Changes').click(function(){
+		$('body').append($("<div>").addClass('toolbar').append($("<input>").attr('type','button').val('Clear Cache').click(function(){
 			localStorage.clear();
 			resetValues();
 		})));
 	}
-	var fs = $('<frameset>').attr('cols','50%,50%').attr('rows','50%,50%');
-	$('body').append(fs);
+	var fs2 = $('<frameset>').attr('cols','50%,*').attr('rows','50%,*');
+	$('body').append(fs2);
 	$.each(frameNames, function(index,frame){
 		var f = $("<frame>").attr("id",frame);
-		fs.append(f);
+		fs2.append(f);
 		frameMap[frame] = f[0];
 		if (index != targetFrameIndex){
 			taMap[frame] = buildFrame(frame);
 		}
 	});
 	resetValues();
-	taMap['html'].focus();
-	render();
 }
 function resetValues(){
 	$.each(frameNames, function(index,frame){
@@ -60,6 +58,8 @@ function resetValues(){
 			taMap[frame].val(value);
 		}
 	});
+	taMap['html'].focus();
+	render();
 }
 // code to build the contents of the frame
 function buildFrame(id){
