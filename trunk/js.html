@@ -1,14 +1,27 @@
 <!DOCTYPE html><html><head>
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
+<link rel="stylesheet" type="text/css" href="cssreset-min.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
 <script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js"></script><script>
 // Static Config
 var jqueryUrls = [
-    'http://code.jquery.com/jquery.min.js',
-    'jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js',
-    'http://online-xslt-transformer.googlecode.com/svn/trunk/jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js'];
-var jqueryUrlIndex = 1;
-var frameNames = ['html','css','js', 'target']
+    'http://code.jquery.com/jquery.min.js',	// 0
+    'jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js', // 1
+    'http://online-xslt-transformer.googlecode.com/svn/trunk/jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js']; // 2
+var jqueryUrl = jqueryUrls[0];
+var frameDefs = {
+	"html": '<b><i>Bold italics</i></b><br/>\n'
+		+'<input id="button" type="button" value="Foobar" />\n'
+		+'<div id="test">abc</div>\n',
+	"css": 'b{color:blue;}\n'
+		+'i{text-decoration:underline;}\n',
+	"js": 'var foobar = function() { alert("hello"); };\n'
+		+'$("#button").click(function(){\n'
+		+'foobar();\n'
+		+'});\n'
+		+'$("#test").css("border","3px solid red");\n',
+	"target": ""
+};
+var frameNames = Object.keys(frameDefs);
 var targetFrameIndex = 3;
 // Variables
 var frameMap = {};
@@ -18,29 +31,35 @@ $(document).ready(function(){
 });
 function init(){
     // build frames and textareas...
-        var fs = $('<frameset>').attr('cols','50%,50%').attr('rows','50%,50%');
-        $('body').append(fs);
-        $.each(frameNames, function(index,frame){
-            var f = $("<frame>").attr("id",frame);
-            fs.append(f);
-            frameMap[frame] = f[0];
-            if (index != targetFrameIndex){
-                    taMap[frame] = buildFrame(frame);
-            }
-        });
-        // provide some example data...
-        taMap['html'].val('<b><i>Bold italics</i></b><br/>\n'
-        +'<input id="button" type="button" value="Foobar" />\n'
-        +'<div id="test">abc</div>\n');
-        taMap['css'].val('b{color:blue;}\n'
-        +'i{text-decoration:underline;}\n');
-        taMap['js'].val('var foobar = function() { alert("hello"); };\n'
-        +'$("#button").click(function(){\n'
-        +'foobar();\n'
-        +'});\n'
-        +'$("#test").css("border","3px solid red");\n');
-    //taMap['html'].focus();
-        render();
+	if (typeof(Storage)!=="undefined"){
+		$('body').append($("<div>").addClass('toolbar').append($("<input>").attr('type','button').val('Clear Changes').click(function(){
+			localStorage.clear();
+			resetValues();
+		})));
+	}
+	var fs = $('<frameset>').attr('cols','50%,50%').attr('rows','50%,50%');
+	$('body').append(fs);
+	$.each(frameNames, function(index,frame){
+		var f = $("<frame>").attr("id",frame);
+		fs.append(f);
+		frameMap[frame] = f[0];
+		if (index != targetFrameIndex){
+			taMap[frame] = buildFrame(frame);
+		}
+	});
+	resetValues();
+	taMap['html'].focus();
+	render();
+}
+function resetValues(){
+	$.each(frameNames, function(index,frame){
+		if (index != targetFrameIndex){
+			// use local storage or default values, to populate textareas...
+			var value = typeof(Storage)!=="undefined" && localStorage[frame]
+				? localStorage[frame] : frameDefs[frame];
+			taMap[frame].val(value);
+		}
+	});
 }
 // code to build the contents of the frame
 function buildFrame(id){
@@ -62,6 +81,15 @@ var docLoaded = false;
 function render(){
 	var frame = frameMap[frameNames[targetFrameIndex]];
 	var doc = frameMap[frameNames[targetFrameIndex]].contentWindow.document;
+	var vhtml = taMap['html'].val();
+	var vcss = taMap['css'].val();
+	var vjs = taMap['js'].val();
+	// store vals to local storage...
+	if (typeof(Storage)!=="undefined"){
+		localStorage.html = vhtml;
+		localStorage.css = vcss;
+		localStorage.js = vjs;
+	}
 	if (!docLoaded){
 		doc.open();
 		doc.close();
@@ -69,14 +97,14 @@ function render(){
 	}
 	// apply css, then html, then js...
 	$('head style',doc).remove();
-	$('head',doc).append($('<style>').html(taMap['css'].val()));
-	$('body',doc).html(taMap['html'].val());
+	$('head',doc).append($('<style>').html(vcss));
+	$('body',doc).html(vhtml);
 	if (scriptLoaded){
-		frame.contentWindow.eval(taMap['js'].val());
+		frame.contentWindow.eval(vjs);
 	} else {
-		var script = $('<script>').attr('type','text/javascript').attr('src',jqueryUrls[jqueryUrlIndex]).get(0);
+		var script = $('<script>').attr('type','text/javascript').attr('src',jqueryUrl).get(0);
 		script.onload = function(){
-			frame.contentWindow.eval(taMap['js'].val());
+			frame.contentWindow.eval(vjs);
 			console.debug("loading inner script... complete");
 		};
 		doc.head.appendChild(script);
