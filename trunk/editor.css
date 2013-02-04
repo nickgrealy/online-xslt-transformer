@@ -1,4 +1,4 @@
-html,body{margin:0 !important;padding:0 !important;}
+*{margin:0;padding:0;}
 input{padding:2px 4px;}
 
 textarea{
