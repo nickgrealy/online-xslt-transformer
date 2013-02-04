@@ -31,12 +31,14 @@ $(document).ready(function(){
 });
 function init(){
     // build frames and textareas...
+  /*
 	if (typeof(Storage)!=="undefined"){
 		$('body').append($("<div>").addClass('toolbar').append($("<input>").attr('type','button').val('Clear Changes').click(function(){
 			localStorage.clear();
 			resetValues();
 		})));
 	}
+  */
 	var fs = $('<frameset>').attr('cols','50%,50%').attr('rows','50%,50%');
 	$('body').append(fs);
 	$.each(frameNames, function(index,frame){
