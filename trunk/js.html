@@ -117,9 +117,10 @@ function render(){
 	} else {
 		var script = $('<script>').attr('type','text/javascript').attr('src',jqueryUrl).get(0);
 		script.onload = function(){
-			frame.contentWindow.eval(vjs);
-			console.debug("loading inner script... complete");
-      $.getScript(jqueryUiUrl)
+        $.getScript(jqueryUiUrl, function(){
+           frame.contentWindow.eval(vjs);
+           console.debug("loading inner script... complete");
+        })
 		};
 		doc.head.appendChild(script);
 		scriptLoaded = true;
