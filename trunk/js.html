@@ -11,13 +11,16 @@
 </script>
 <link rel="stylesheet" type="text/css" href="cssreset-min.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
-<script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js"></script><script>
+<script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js"></script>
+<script src="jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
+<script>
 // Static Config
 var jqueryUrls = [
     'http://code.jquery.com/jquery.min.js',	// 0
     'jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js', // 1
     'http://online-xslt-transformer.googlecode.com/svn/trunk/jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js']; // 2
-var jqueryUrl = jqueryUrls[0];
+var jqueryUiUrl = 'jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js'
+var jqueryUrl = jqueryUrls[1];
 var frameDefs = {
 	"html": '<b><i>Bold italics</i></b><br/>\n'
 		+'<input id="button" type="button" value="Foobar" />\n'
@@ -116,6 +119,7 @@ function render(){
 		script.onload = function(){
 			frame.contentWindow.eval(vjs);
 			console.debug("loading inner script... complete");
+      $.getScript(jqueryUiUrl)
 		};
 		doc.head.appendChild(script);
 		scriptLoaded = true;
