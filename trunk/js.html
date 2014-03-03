@@ -1,129 +1,78 @@
-<!DOCTYPE html><html><head>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-38277515-1']);
-  _gaq.push(['_trackPageview']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-<link rel="stylesheet" type="text/css" href="cssreset-min.css">
-<link rel="stylesheet" type="text/css" href="editor.css">
+<html>
+<head>
 <script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js"></script>
 <script src="jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.min.css">
 <script>
-// Static Config
-var jqueryUrls = [
-    'http://code.jquery.com/jquery.min.js',	// 0
-    'jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js', // 1
-    'http://online-xslt-transformer.googlecode.com/svn/trunk/jquery-ui-1.9.2.custom/js/jquery-1.8.3.min.js']; // 2
-var jqueryUiUrl = 'jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js'
-var jqueryUrl = jqueryUrls[1];
-var frameDefs = {
-	"html": '<b><i>Bold italics</i></b><br/>\n'
-		+'<input id="button" type="button" value="Foobar" />\n'
-		+'<div id="test">abc</div>\n',
-	"css": 'b{color:blue;}\n'
-		+'i{text-decoration:underline;}\n',
-	"js": 'var foobar = function() { alert("hello"); };\n'
-		+'$("#button").click(function(){\n'
-		+'foobar();\n'
-		+'});\n'
-		+'$("#test").css("border","3px solid red");\n',
-	"target": ""
-};
-  var frameNames = ['html','css','js','target'];//Object.keys(frameDefs);
-var targetFrameIndex = 3;
-// Variables
-var frameMap = {};
-var taMap = {};
+var inputs = ['html','js','css']
 $(document).ready(function(){
-    init();
-});
-function init(){
-    // build frames and textareas...
-	if (typeof(Storage)!=="undefined"){
-		$('body').append($("<div>").addClass('toolbar').append($("<input>").attr('type','button').val('Clear Cache').click(function(){
-			localStorage.clear();
-			resetValues();
-		})));
-	}
-	var fs2 = $('<frameset>').attr('cols','50%,*').attr('rows','50%,*');
-	$('body').append(fs2);
-	$.each(frameNames, function(index,frame){
-		var f = $("<frame>").attr("id",frame);
-		fs2.append(f);
-		frameMap[frame] = f[0];
-		if (index != targetFrameIndex){
-			taMap[frame] = buildFrame(frame);
-		}
-	});
-	resetValues();
+    
+    var timer = new DelayedTimer( updateFrame )
+    for (var i = 0; i < inputs.length; i++){
+        $('#' + inputs[i]).keyup( timer.start ).keyup( saveContent )
+    }
+    loadContent()
+    updateFrame()
+    log($('table tr:nth-child(2) td:first-child').length)
+    $('table tr:nth-child(2) td:first-child').resizable({handles:'se,s,e', minWidth:100, minHeight:100})
+
+    log('loaded')
+})
+function saveContent(){
+    if (localStorage){
+        for (var i = 0; i < inputs.length; i++){
+            localStorage[inputs[i]] = $('#' + inputs[i]).val()
+        }
+    }
 }
-function resetValues(){
-	$.each(frameNames, function(index,frame){
-		if (index != targetFrameIndex){
-			// use local storage or default values, to populate textareas...
-			var value = typeof(Storage)!=="undefined" && localStorage[frame]
-				? localStorage[frame] : frameDefs[frame];
-			taMap[frame].val(value);
-		}
-	});
-	taMap['html'].focus();
-	render();
+function loadContent(){
+    if (localStorage){
+        for (var i = 0; i < inputs.length; i++){
+            $('#' + inputs[i]).val(localStorage[inputs[i]])
+        }
+    }
 }
-// code to build the contents of the frame
-function buildFrame(id){
-	var doc = frameMap[id].contentWindow.document;
-	doc.open();
-	doc.close();
-    $('head',doc).append($('<link>').attr('rel','stylesheet').attr('href','editor.css'));
-	$('body',doc).append($("<h1>").addClass('header').html(id));
-    var ta = $('<textarea>',doc).keyup(render).blur(function(){
-        $('h1',doc).fadeTo('slow',1);
-    }).focus(function(){
-        $('h1',doc).fadeTo('slow',0.2);
-    }).blur();
-	$('body',doc).append(ta);
-	return ta;
+function updateFrame(){
+    var js = $('#js').val(), html = $('#html').val(), css = '<style>'+$('#css').val()+'</style>', frame = document.getElementById('frame')
+    js = js == '' ? 'true' : js
+    // css + html
+    $('#frame').contents().find('html').html(css + html)
+    // js
+    var contWin = document.getElementById('frame').contentWindow
+    if (contWin.execScript){
+        // IE only
+        contWin.execScript(js)
+    } else if (contWin.eval){
+        contWin.eval(js)
+    } else {
+        log('I do not know how to execute js in your browser!')
+    }
 }
-var scriptLoaded = false;
-var docLoaded = false;
-function render(){
-	var frame = frameMap[frameNames[targetFrameIndex]];
-	var doc = frameMap[frameNames[targetFrameIndex]].contentWindow.document;
-	var vhtml = taMap['html'].val();
-	var vcss = taMap['css'].val();
-	var vjs = taMap['js'].val();
-	// store vals to local storage...
-	if (typeof(Storage)!=="undefined"){
-		localStorage.html = vhtml;
-		localStorage.css = vcss;
-		localStorage.js = vjs;
-	}
-	if (!docLoaded){
-		doc.open();
-		doc.close();
-		docLoaded = true;
-	}
-	// apply css, then html, then js...
-	$('head style',doc).remove();
-  $('head',doc).append($('<style>').html(vcss));
-	$('body',doc).html(vhtml);
-	if (scriptLoaded){
-		frame.contentWindow.eval(vjs);
-	} else {
-		var script = $('<script>').attr('type','text/javascript').attr('src',jqueryUrl).get(0);
-		script.onload = function(){
-        $.getScript(jqueryUiUrl, function(){
-           frame.contentWindow.eval(vjs);
-           console.debug("loading inner script... complete");
-        })
-		};
-		doc.head.appendChild(script);
-		scriptLoaded = true;
-	}
-};
-</script></head><body/></html> 
+function DelayedTimer(callback) {
+    this.callback = callback
+    this.ref = null
+    this.start = function(){
+        clearInterval(DelayedTimer.ref)
+        DelayedTimer.ref = setTimeout(callback, 300)
+    }
+}
+/* logging */
+function log(mesg){ if (typeof(console) !== 'undefined'){ console.log(mesg) } }
+</script>
+<style>
+* {padding:0px;margin:0px;}
+html,body {width:100%;height:100%;}
+table,tr,td,th{border:1px solid grey;border-collapse:collapse;padding:0px;margin:0px;}
+table{width:100%;height:100%;}
+th{height:30px;background:lightgrey;}
+textarea,iframe{width:100%;height:100%;overflow:auto;white-space:normal;}
+</style>
+</head>
+<body>
+<table>
+<tr><th>html</th><th>css</th></tr>
+<tr><td><textarea id='html'><!-- html --></textarea></td><td><textarea id='css'>/* css */</textarea></td><td></td></tr>
+<tr><th>js</th><th>result</th></tr>
+<tr><td><textarea id='js'>/* javascript */</textarea></td><td><iframe id='frame'></iframe></td></tr>
+</table>
+</body>
