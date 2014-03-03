@@ -110,7 +110,7 @@ function render(){
 	}
 	// apply css, then html, then js...
 	$('head style',doc).remove();
-  //$('head',doc).append($('<style>').html(vcss));
+  $('head',doc).append($('<style>').html(vcss));
 	$('body',doc).html(vhtml);
 	if (scriptLoaded){
 		frame.contentWindow.eval(vjs);
