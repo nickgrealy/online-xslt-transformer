@@ -1,0 +1,208 @@
+import org.apache.tools.ant.filters.FixCrLfFilter
+import org.apache.tools.ant.filters.ReplaceTokens
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    compile 'net.sf.saxon:Saxon-B:9.0'
+}
+
+ext {
+    distFileName = "${project.name}-${project.version}"
+    mainClass = "XsltApplet"
+    distDir = 'src/main/dist'
+    webResourcesFolderName = "www"
+    signedResourcesFolderName = "signed"
+    jarResourcesFolderName = "libs"
+    wwwDir = "$distDir/$webResourcesFolderName"
+    allowedCodebase = '*'
+    keytool = new File(System.properties.'java.home', 'bin/keytool' + (isWin() ? '.exe' : ''))
+}
+
+/*
+init {
+    // create source directories
+    sourceSets.all { set -> set.allSource.srcDirs.each { it.mkdirs() } }
+}
+*/
+
+jar {
+    manifest {
+        // http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/security/manifest.html
+        attributes 'Application-Name': 'XsltApplet',
+                //'Implementation-Title': 'XsltApplet',
+                //'Implementation-Version': version,
+                'Class-Path': 'Saxon-B-9.0.jar',
+                'Permissions': 'sandbox',
+//                'Codebase': allowedCodebase,
+//                'Application-Library-Allowable-Codebase': allowedCodebase,
+                'Caller-Allowable-Codebase': allowedCodebase
+                //'Trusted-Only': 'true',
+                //'Trusted-Library': 'true'
+    }
+}
+// http://www.coderanch.com/t/435198/Security/Creating-CA-keytool ???
+// http://docs.oracle.com/cd/E19509-01/820-3503/ggezu/index.html
+def initKeyStore() {
+    // generate a keystore if it doesn't already exist...
+    if (!file('certs/keystore.jks').exists()){
+        logger.info('>> Generating keystore.')
+        ant.mkdir(dir:'certs')
+        assert keytool.exists(), "keytool could not be found under - '$keytool'"
+        def dname = 'CN=nickgrealy@gmail.com, OU=ID, O=NG, L=Sydney, S=NSW, C=AU'
+        List keytoolArgs = '-genkey -validity 3600 -noprompt -alias server -keyalg RSA -keysize 2048 -keystore certs/keystore.jks -storepass password -keypass password -dname'.split(/ /)
+        exec {
+            executable = keytool
+            args = keytoolArgs + dname
+        }
+    } else {
+        logger.info('>> Skipping keystore generation.')
+    }
+    exportPublicKey()
+}
+def exportPublicKey() {
+    // generate a keystore if it doesn't already exist...
+    def publicCer = file('certs/public.cer')
+    if (!publicCer.exists()){
+        logger.info('>> Generating certificate.')
+        ant.mkdir(dir:'certs')
+        assert keytool.exists(), "keytool could not be found under - '$keytool'"
+        exec {
+            executable = keytool
+            args = (List)"-export -keystore certs/keystore.jks -alias server -storepass password -keypass password -file $publicCer".split(/ /)
+        }
+    } else {
+        logger.info('>> Skipping keystore generation.')
+    }
+}
+jar.doLast {
+    signjar( tasks.jar.archivePath )
+}
+
+def signjar(jarpath, updateManifest = false){
+    initKeyStore()
+    // update manifest
+    if (updateManifest){
+        ant.jar(file: jarpath, update: true){
+            delegate.manifest {
+                attribute(name:'Application-Name', value: jarpath.name)
+                attribute(name:'Permissions', value:'sandbox')
+//                attribute(name:'Main-Class', value:'')
+//                attribute(name:'Codebase', value: allowedCodebase)
+//                attribute(name:'Application-Library-Allowable-Codebase', value: allowedCodebase)
+                attribute(name:'Caller-Allowable-Codebase', value: allowedCodebase)
+            }
+        }
+    }
+    // sign jar
+    logger.info(">>> Signing jar - '$jarpath'")
+    ant.mkdir(dir: "$buildDir/$signedResourcesFolderName")
+    ant.signjar(destDir: "$buildDir/$signedResourcesFolderName",
+            jar: jarpath,
+            alias: 'server',
+            storetype:"jks",
+            keystore:"certs/keystore.jks",
+            storepass:"password",
+            preservelastmodified:"true")
+}
+
+task downloadJqueryUICss(type: Downloader) {
+    sourceUrl = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css'
+    targetFile = file("$wwwDir/jquery-ui.css")
+}
+
+task downloadJqueryUI(type: Downloader) {
+    sourceUrl = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js'
+    targetFile = file("$wwwDir/jquery-ui.js")
+}
+
+task downloadJquery(type: Downloader) {
+    sourceUrl = 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'
+    targetFile = file("$wwwDir/jquery.js")
+}
+
+task copyResources(type: Copy) {
+    from 'src/main/www'
+    into 'src/main/dist'
+    filter(ReplaceTokens, tokens: [
+            'UID': System.currentTimeMillis().toString(),
+            'distFileName': distFileName.toString(),
+            'mainClass': mainClass.toString(),
+            'webResourcesFolderName': webResourcesFolderName.toString(),
+            'jarResourcesFolderName': jarResourcesFolderName.toString()
+    ])
+}
+
+task copyRuntimeDependencies(type: Copy) {
+    from configurations.runtime
+    into "$buildDir/tmp/runtimeDeps"
+}
+copyRuntimeDependencies.doLast {
+    file("$buildDir/tmp/runtimeDeps").listFiles().each {
+        signjar(it, true)
+    }
+}
+
+task dist(type:Zip){
+    into( jarResourcesFolderName ) {
+        //from configurations.runtime - ignore runtime deps, these should be signed!
+        from file("$buildDir/$signedResourcesFolderName")
+    }
+    from file('src/main/dist')
+}
+
+dist.dependsOn jar
+dist.dependsOn downloadJquery
+dist.dependsOn downloadJqueryUI
+dist.dependsOn downloadJqueryUICss
+dist.dependsOn copyResources
+dist.dependsOn copyRuntimeDependencies
+
+task unzip(type: Copy) {
+    from zipTree("${buildDir}/distributions/${distFileName}.zip")
+    into file("unpacked")
+}
+
+unzip.dependsOn dist
+
+/* custom extensions */
+
+class Downloader extends DefaultTask {
+
+    @Input
+    String sourceUrl
+
+    @OutputFile
+    File targetFile
+
+    @TaskAction
+    void download() {
+        if (!targetFile.exists()) {
+            targetFile.parentFile.mkdirs()
+            logger.info "Downloading file '$sourceUrl'...'" + System.props['http.proxyHost']
+            if (System.props['http.proxyHost']){
+                ant.setproxy(
+                        proxyhost: System.props['http.proxyHost'],
+                        proxyport: System.props['http.proxyPort'],
+                        proxyuser: System.props['http.proxyUser'],
+                        proxypassword: System.props['http.proxyPassword'],
+                        nonproxyhosts: System.props['http.nonProxyHosts']
+                )
+            }
+            ant.get(src: sourceUrl, dest: targetFile)
+        }
+    }
+
+}
+
+def isWin(){ System.properties['os.name'].toLowerCase().contains('windows') }
+

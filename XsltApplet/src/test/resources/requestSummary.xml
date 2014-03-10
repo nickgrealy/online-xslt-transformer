@@ -1,0 +1,901 @@
+<variable type="AdviceRequest">
+    <opportunity type="Opportunity">
+        <id type="String"><![CDATA[4.4.16z]]></id>
+        <refNum type="String"><![CDATA[4.4.16z]]></refNum>
+        <desc type="String"><![CDATA[Risk Review]]></desc>
+        <productType type="String"><![CDATA[Wealth Mgt - Plan Fee]]></productType>
+        <productAmt type="String"><![CDATA[50000]]></productAmt>
+        <comments type="String"><![CDATA[Customer has requested an appointment at home on the 18th March 2013 at 10 a.m.]]></comments>
+        <organisationID type="String" />
+        <individualID type="String"><![CDATA[77760110072]]></individualID>
+        <confirmInitialAdvice type="String"><![CDATA[Proceed with Meeting]]></confirmInitialAdvice>
+        <rejectReason type="String" />
+        <rejectComments type="String" />
+    </opportunity>
+    <client type="Client[]">
+        <item>
+            <person type="Person">
+                <title type="String"><![CDATA[MR]]></title>
+                <firstName type="String"><![CDATA[Tomas]]></firstName>
+                <lastName type="String"><![CDATA[Smithonsioanas]]></lastName>
+                <preferredName type="String" />
+                <gender type="String"><![CDATA[MALE]]></gender>
+                <maritalStatus type="String"><![CDATA[MARRIED]]></maritalStatus>
+                <dateOfBirth type="String"><![CDATA[02-10-1964]]></dateOfBirth>
+                <dateOfBirthStr type="String"><![CDATA[19641002]]></dateOfBirthStr>
+                <age type="String"><![CDATA[49]]></age>
+            </person>
+            <homeAddress type="Address">
+                <line1 type="String"><![CDATA[29 BAYVIEW RD]]></line1>
+                <suburb type="String"><![CDATA[FRANKSTON]]></suburb>
+                <state type="String"><![CDATA[VIC]]></state>
+                <postcode type="String"><![CDATA[3199]]></postcode>
+                <country type="String"><![CDATA[AUSTRALIA]]></country>
+            </homeAddress>
+            <contactDetails type="ContactDetails">
+                <workPhone type="String"><![CDATA[04 48369255]]></workPhone>
+                <mobilePhone type="String" />
+                <fax type="String" />
+                <email type="String"><![CDATA[theSmithfamily@optusnet.com.au]]></email>
+                <homePhone type="String"><![CDATA[03 97700207]]></homePhone>
+            </contactDetails>
+            <clientID type="String"><![CDATA[77760110072]]></clientID>
+            <occupation type="Occupation">
+                <occupation type="String"><![CDATA[MANAGER/SUPERVISOR/ADMINISTRATOR/OFFICIAL]]></occupation>
+            </occupation>
+            <canDelete type="Boolean"><![CDATA[false]]></canDelete>
+            <isPrimaryClient type="Boolean"><![CDATA[true]]></isPrimaryClient>
+        </item>
+        <item>
+            <person type="Person">
+                <title type="String"><![CDATA[MR]]></title>
+                <firstName type="String"><![CDATA[Tomas]]></firstName>
+                <lastName type="String"><![CDATA[TTT2]]></lastName>
+                <preferredName type="String" />
+                <gender type="String"><![CDATA[MALE]]></gender>
+                <maritalStatus type="String"><![CDATA[MARRIED]]></maritalStatus>
+                <dateOfBirth type="String"><![CDATA[02-10-1964]]></dateOfBirth>
+                <dateOfBirthStr type="String"><![CDATA[19641002]]></dateOfBirthStr>
+                <age type="String"><![CDATA[49]]></age>
+            </person>
+            <homeAddress type="Address">
+                <line1 type="String"><![CDATA[29 BAYVIEW RD]]></line1>
+                <suburb type="String"><![CDATA[FRANKSTON]]></suburb>
+                <state type="String"><![CDATA[VIC]]></state>
+                <postcode type="String"><![CDATA[3199]]></postcode>
+                <country type="String"><![CDATA[AUSTRALIA]]></country>
+            </homeAddress>
+            <contactDetails type="ContactDetails">
+                <workPhone type="String"><![CDATA[04 48369255]]></workPhone>
+                <mobilePhone type="String" />
+                <fax type="String" />
+                <email type="String"><![CDATA[theSmithfamily@optusnet.com.au]]></email>
+                <homePhone type="String"><![CDATA[03 97700207]]></homePhone>
+            </contactDetails>
+            <clientID type="String"><![CDATA[77760110072]]></clientID>
+            <occupation type="Occupation">
+                <occupation type="String"><![CDATA[MANAGER/SUPERVISOR/ADMINISTRATOR/OFFICIAL]]></occupation>
+            </occupation>
+            <canDelete type="Boolean"><![CDATA[false]]></canDelete>
+            <isPrimaryClient type="Boolean"><![CDATA[false]]></isPrimaryClient>
+        </item>
+        <item>
+            <person type="Person">
+                <title type="String"><![CDATA[MR]]></title>
+                <firstName type="String"><![CDATA[Tomas]]></firstName>
+                <lastName type="String"><![CDATA[TTT3]]></lastName>
+                <preferredName type="String" />
+                <gender type="String"><![CDATA[MALE]]></gender>
+                <maritalStatus type="String"><![CDATA[MARRIED]]></maritalStatus>
+                <dateOfBirth type="String"><![CDATA[02-10-1964]]></dateOfBirth>
+                <dateOfBirthStr type="String"><![CDATA[19641002]]></dateOfBirthStr>
+                <age type="String"><![CDATA[49]]></age>
+            </person>
+            <homeAddress type="Address">
+                <line1 type="String"><![CDATA[29 BAYVIEW RD]]></line1>
+                <suburb type="String"><![CDATA[FRANKSTON]]></suburb>
+                <state type="String"><![CDATA[VIC]]></state>
+                <postcode type="String"><![CDATA[3199]]></postcode>
+                <country type="String"><![CDATA[AUSTRALIA]]></country>
+            </homeAddress>
+            <contactDetails type="ContactDetails">
+                <workPhone type="String"><![CDATA[04 48369255]]></workPhone>
+                <mobilePhone type="String" />
+                <fax type="String" />
+                <email type="String"><![CDATA[theSmithfamily@optusnet.com.au]]></email>
+                <homePhone type="String"><![CDATA[03 97700207]]></homePhone>
+            </contactDetails>
+            <clientID type="String"><![CDATA[77760110072]]></clientID>
+            <occupation type="Occupation">
+                <occupation type="String"><![CDATA[MANAGER/SUPERVISOR/ADMINISTRATOR/OFFICIAL]]></occupation>
+            </occupation>
+            <canDelete type="Boolean"><![CDATA[false]]></canDelete>
+            <isPrimaryClient type="Boolean"><![CDATA[false]]></isPrimaryClient>
+        </item>
+        <item>
+            <person type="Person">
+                <title type="String"><![CDATA[MR]]></title>
+                <firstName type="String"><![CDATA[Tomas]]></firstName>
+                <lastName type="String"><![CDATA[TTT4]]></lastName>
+                <preferredName type="String" />
+                <gender type="String"><![CDATA[MALE]]></gender>
+                <maritalStatus type="String"><![CDATA[MARRIED]]></maritalStatus>
+                <dateOfBirth type="String"><![CDATA[02-10-1964]]></dateOfBirth>
+                <dateOfBirthStr type="String"><![CDATA[19641002]]></dateOfBirthStr>
+                <age type="String"><![CDATA[49]]></age>
+            </person>
+            <homeAddress type="Address">
+                <line1 type="String"><![CDATA[29 BAYVIEW RD]]></line1>
+                <suburb type="String"><![CDATA[FRANKSTON]]></suburb>
+                <state type="String"><![CDATA[VIC]]></state>
+                <postcode type="String"><![CDATA[3199]]></postcode>
+                <country type="String"><![CDATA[AUSTRALIA]]></country>
+            </homeAddress>
+            <contactDetails type="ContactDetails">
+                <workPhone type="String"><![CDATA[04 48369255]]></workPhone>
+                <mobilePhone type="String" />
+                <fax type="String" />
+                <email type="String"><![CDATA[theSmithfamily@optusnet.com.au]]></email>
+                <homePhone type="String"><![CDATA[03 97700207]]></homePhone>
+            </contactDetails>
+            <clientID type="String"><![CDATA[77760110072]]></clientID>
+            <occupation type="Occupation">
+                <occupation type="String"><![CDATA[MANAGER/SUPERVISOR/ADMINISTRATOR/OFFICIAL]]></occupation>
+            </occupation>
+            <canDelete type="Boolean"><![CDATA[false]]></canDelete>
+            <isPrimaryClient type="Boolean"><![CDATA[false]]></isPrimaryClient>
+        </item>
+        <item>
+            <person type="Person">
+                <title type="String"><![CDATA[MR]]></title>
+                <firstName type="String"><![CDATA[Tomas]]></firstName>
+                <lastName type="String"><![CDATA[TTT5]]></lastName>
+                <preferredName type="String" />
+                <gender type="String"><![CDATA[MALE]]></gender>
+                <maritalStatus type="String"><![CDATA[MARRIED]]></maritalStatus>
+                <dateOfBirth type="String"><![CDATA[02-10-1964]]></dateOfBirth>
+                <dateOfBirthStr type="String"><![CDATA[19641002]]></dateOfBirthStr>
+                <age type="String"><![CDATA[49]]></age>
+            </person>
+            <homeAddress type="Address">
+                <line1 type="String"><![CDATA[29 BAYVIEW RD]]></line1>
+                <suburb type="String"><![CDATA[FRANKSTON]]></suburb>
+                <state type="String"><![CDATA[VIC]]></state>
+                <postcode type="String"><![CDATA[3199]]></postcode>
+                <country type="String"><![CDATA[AUSTRALIA]]></country>
+            </homeAddress>
+            <contactDetails type="ContactDetails">
+                <workPhone type="String"><![CDATA[04 48369255]]></workPhone>
+                <mobilePhone type="String" />
+                <fax type="String" />
+                <email type="String"><![CDATA[theSmithfamily@optusnet.com.au]]></email>
+                <homePhone type="String"><![CDATA[03 97700207]]></homePhone>
+            </contactDetails>
+            <clientID type="String"><![CDATA[77760110072]]></clientID>
+            <occupation type="Occupation">
+                <occupation type="String"><![CDATA[MANAGER/SUPERVISOR/ADMINISTRATOR/OFFICIAL]]></occupation>
+            </occupation>
+            <canDelete type="Boolean"><![CDATA[false]]></canDelete>
+            <isPrimaryClient type="Boolean"><![CDATA[false]]></isPrimaryClient>
+        </item>
+        <item>
+            <person type="Person">
+                <title type="String"><![CDATA[MRS]]></title>
+                <firstName type="String"><![CDATA[Janeutelitee]]></firstName>
+                <lastName type="String"><![CDATA[Smithsonianand]]></lastName>
+                <preferredName type="String" />
+                <gender type="String"><![CDATA[FEMALE]]></gender>
+                <maritalStatus type="String"><![CDATA[MARRIED]]></maritalStatus>
+                <dateOfBirth type="String"><![CDATA[01-08-1964]]></dateOfBirth>
+                <dateOfBirthStr type="String"><![CDATA[19640801]]></dateOfBirthStr>
+                <age type="String"><![CDATA[49]]></age>
+            </person>
+            <homeAddress type="Address">
+                <line1 type="String"><![CDATA[29 BAYVIEW RD]]></line1>
+                <suburb type="String"><![CDATA[FRANKSTON]]></suburb>
+                <state type="String"><![CDATA[VIC]]></state>
+                <postcode type="String"><![CDATA[3199]]></postcode>
+                <country type="String"><![CDATA[AUSTRALIA]]></country>
+            </homeAddress>
+            <contactDetails type="ContactDetails">
+                <workPhone type="String"><![CDATA[04 00072298]]></workPhone>
+                <mobilePhone type="String"><![CDATA[0400072298]]></mobilePhone>
+                <fax type="String" />
+                <email type="String"><![CDATA[theSmithfamily@optusnet.com.au]]></email>
+                <homePhone type="String"><![CDATA[03 97700207]]></homePhone>
+            </contactDetails>
+            <clientID type="String"><![CDATA[46491110055]]></clientID>
+            <occupation type="Occupation">
+                <occupation type="String"><![CDATA[PRIMARY SCHOOL TEACHER]]></occupation>
+            </occupation>
+            <canDelete type="Boolean"><![CDATA[true]]></canDelete>
+            <isPrimaryClient type="Boolean"><![CDATA[false]]></isPrimaryClient>
+        </item>
+    </client>
+    <income type="Income">
+        <details type="IncomeExpenseDetails[]">
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <type type="String"><![CDATA[Income - MR Tomas Smithonsioanas]]></type>
+                <amountTaxable type="Decimal"><![CDATA[94653.0]]></amountTaxable>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MRS Janeutelitee Smithsonianand]]></owner>
+                <type type="String"><![CDATA[Income - MRS Janeutelitee Smithsonianand]]></type>
+                <amountTaxable type="Decimal"><![CDATA[86900.0]]></amountTaxable>
+            </item>
+        </details>
+        <totalIncomeGross type="Decimal"><![CDATA[181553.0]]></totalIncomeGross>
+        <totalIncomeNet type="Decimal"><![CDATA[181553.0]]></totalIncomeNet>
+    </income>
+    <expenses type="Expenses">
+        <details type="IncomeExpenseDetails[]">
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <type type="String"><![CDATA[Expense]]></type>
+                <amountTaxable type="Decimal"><![CDATA[30000.0]]></amountTaxable>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MRS Janeutelitee Smithsonianand]]></owner>
+                <type type="String"><![CDATA[Expense]]></type>
+                <amountTaxable type="Decimal"><![CDATA[9000.0]]></amountTaxable>
+            </item>
+        </details>
+        <totalCombined type="Decimal"><![CDATA[39000.0]]></totalCombined>
+        <surplusAmount type="Decimal"><![CDATA[142553.0]]></surplusAmount>
+    </expenses>
+    <insurance type="Insurance">
+        <personalInsurance type="PersonalInsurance[]" />
+        <incomeProtection type="IncomeProtectionInsurance[]" />
+        <assets type="ExistingAssets[]" />
+    </insurance>
+    <assets type="AssetDetails[]">
+        <item>
+            <type type="String"><![CDATA[Property - Residential]]></type>
+            <owner type="String"><![CDATA[Joint]]></owner>
+            <value type="Decimal"><![CDATA[360000.0]]></value>
+        </item>
+        <item>
+            <type type="String"><![CDATA[Automobile]]></type>
+            <owner type="String"><![CDATA[Joint]]></owner>
+            <value type="Decimal"><![CDATA[32000.0]]></value>
+        </item>
+        <item>
+            <type type="String"><![CDATA[Automobile]]></type>
+            <owner type="String"><![CDATA[Joint]]></owner>
+            <value type="Decimal"><![CDATA[50000.0]]></value>
+        </item>
+    </assets>
+    <liabilities type="LiabilityDetails[]" />
+    <planSummary type="PlanSummary">
+        <planner type="EmployeeDetails">
+            <name type="String"><![CDATA[Che Man]]></name>
+            <fname type="String"><![CDATA[Che]]></fname>
+            <lname type="String"><![CDATA[Man]]></lname>
+            <salaryNumber type="String"><![CDATA[L053247]]></salaryNumber>
+            <type type="String"><![CDATA[Advanced Financial Planner]]></type>
+            <brand type="String"><![CDATA[SGB]]></brand>
+            <practiceManager type="String"><![CDATA[Graham Lee]]></practiceManager>
+            <username type="String"><![CDATA[AUAUTD0001\L053247]]></username>
+            <region type="String"><![CDATA[NSW]]></region>
+            <roleDescription type="String"><![CDATA[Advanced Financial Planner]]></roleDescription>
+            <PAgroup type="String"><![CDATA[NSWPATEAM1]]></PAgroup>
+            <partnershipCode type="String" />
+            <email type="String"><![CDATA[no_email@btfinancialgroup.com]]></email>
+            <calendar type="String"><![CDATA[Australia NSW Holidays]]></calendar>
+            <isPartnership type="Boolean"><![CDATA[false]]></isPartnership>
+            <brandDetail type="String"><![CDATA[BoM]]></brandDetail>
+        </planner>
+        <interviewLocation type="String"><![CDATA[Sydney]]></interviewLocation>
+        <referral type="Referral">
+            <employeeDetails type="EmployeeDetails">
+                <salaryNumber type="String"><![CDATA[F051320]]></salaryNumber>
+            </employeeDetails>
+        </referral>
+        <discoveryAppointmentDate type="Date"><![CDATA[2014/02/04 00:00:00.0 EST]]></discoveryAppointmentDate>
+        <appointmentDateText type="String"><![CDATA[04-02-2014]]></appointmentDateText>
+        <appointmentEndTime type="String"><![CDATA[13:30]]></appointmentEndTime>
+        <appointmentStartTime type="String"><![CDATA[13:00]]></appointmentStartTime>
+        <documentMailingAddress type="String" />
+        <deliveryMethod type="String"><![CDATA[Post]]></deliveryMethod>
+        <postToHomeBranch type="Boolean"><![CDATA[false]]></postToHomeBranch>
+        <reportList type="AdditionalReport[]" />
+        <plannerAssistantGroupName type="String"><![CDATA[NSWPATEAM1]]></plannerAssistantGroupName>
+        <customerFaceTimeInHours type="String"><![CDATA[1]]></customerFaceTimeInHours>
+        <customerFaceTimeInMinutes type="String"><![CDATA[0]]></customerFaceTimeInMinutes>
+    </planSummary>
+    <fileNote type="FileNote[]" />
+    <followUpAppointment type="FollowUpAppointment">
+        <date type="String"><![CDATA[04-02-2014]]></date>
+        <followUpDate type="Date"><![CDATA[2014/01/30 00:00:00.0 EST]]></followUpDate>
+        <location type="String"><![CDATA[Sydney]]></location>
+        <appointmentEndTime type="String"><![CDATA[14:30]]></appointmentEndTime>
+        <documentDelieveryMethod type="String"><![CDATA[Face to Face]]></documentDelieveryMethod>
+        <appointmentStartTime type="String"><![CDATA[14:00]]></appointmentStartTime>
+    </followUpAppointment>
+    <currentInvestments type="CurrentInvestments">
+        <investmentsCash type="InvestmentsCash[]" />
+        <investmentsProperty type="InvestmentsProperty[]" />
+        <investmentsShares type="InvestmentsShares[]" />
+        <investmentsSavings type="InvestmentsSavings[]" />
+    </currentInvestments>
+    <accounts type="Accounts">
+        <accountInternal type="AccountInternal[]">
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <number type="String"><![CDATA[037164492557]]></number>
+                    <type type="String"><![CDATA[MBK]]></type>
+                    <typeIndicator type="String"><![CDATA[A]]></typeIndicator>
+                    <description type="String"><![CDATA[HOUSING LOAN]]></description>
+                    <unitType type="String"><![CDATA[M]]></unitType>
+                </product>
+                <type type="String" />
+                <limit type="Decimal"><![CDATA[326924.22]]></limit>
+                <balanceAmount type="Decimal"><![CDATA[-326919.9]]></balanceAmount>
+                <balanceSign type="String"><![CDATA[-]]></balanceSign>
+                <jointAccountFlag type="String"><![CDATA[Y]]></jointAccountFlag>
+                <tbType type="String"><![CDATA[391]]></tbType>
+                <tbProdType type="String"><![CDATA[HSNG]]></tbProdType>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <number type="String"><![CDATA[737604544507]]></number>
+                    <type type="String"><![CDATA[SBC]]></type>
+                    <typeIndicator type="String"><![CDATA[A]]></typeIndicator>
+                    <description type="String"><![CDATA[WESTPAC CHOICE]]></description>
+                    <unitType type="String"><![CDATA[A]]></unitType>
+                </product>
+                <type type="String" />
+                <limit type="Decimal"><![CDATA[129489.37]]></limit>
+                <balanceAmount type="Decimal"><![CDATA[-129329.14]]></balanceAmount>
+                <balanceSign type="String"><![CDATA[-]]></balanceSign>
+                <jointAccountFlag type="String"><![CDATA[Y]]></jointAccountFlag>
+                <tbType type="String"><![CDATA[831]]></tbType>
+                <tbProdType type="String"><![CDATA[HSNG]]></tbProdType>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <number type="String"><![CDATA[037604 999]]></number>
+                    <type type="String"><![CDATA[IDN]]></type>
+                    <typeIndicator type="String"><![CDATA[S]]></typeIndicator>
+                    <description type="String"><![CDATA[760493246268 WBC IDV No.]]></description>
+                    <unitType type="String"><![CDATA[M]]></unitType>
+                </product>
+                <type type="String" />
+                <limit type="Decimal"><![CDATA[0.0]]></limit>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <balanceSign type="String"><![CDATA[-]]></balanceSign>
+                <jointAccountFlag type="String"><![CDATA[Y]]></jointAccountFlag>
+                <tbType type="String"><![CDATA[172]]></tbType>
+                <tbProdType type="String"><![CDATA[IPL]]></tbProdType>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MRS Janeutelitee Smithsonianand]]></owner>
+                <product type="Product">
+                    <number type="String"><![CDATA[CLMAB3DM327404]]></number>
+                    <type type="String"><![CDATA[WFS]]></type>
+                    <typeIndicator type="String"><![CDATA[A]]></typeIndicator>
+                    <description type="String"><![CDATA[FUTURE COV ACC ONLY 1ST]]></description>
+                    <unitType type="String"><![CDATA[W]]></unitType>
+                </product>
+                <type type="String" />
+                <limit type="Decimal"><![CDATA[0.0]]></limit>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <balanceSign type="String"><![CDATA[+]]></balanceSign>
+                <jointAccountFlag type="String"><![CDATA[N]]></jointAccountFlag>
+                <tbType type="String" />
+                <tbProdType type="String"><![CDATA[74821]]></tbProdType>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MRS Janeutelitee Smithsonianand]]></owner>
+                <product type="Product">
+                    <number type="String"><![CDATA[733272684758]]></number>
+                    <type type="String"><![CDATA[SBC]]></type>
+                    <typeIndicator type="String"><![CDATA[A]]></typeIndicator>
+                    <description type="String"><![CDATA[WESTPAC CHOICE - SHOVE IT]]></description>
+                    <unitType type="String"><![CDATA[4]]></unitType>
+                </product>
+                <type type="String" />
+                <limit type="Decimal"><![CDATA[0.0]]></limit>
+                <balanceAmount type="Decimal"><![CDATA[0.63]]></balanceAmount>
+                <balanceSign type="String"><![CDATA[+]]></balanceSign>
+                <jointAccountFlag type="String"><![CDATA[N]]></jointAccountFlag>
+                <tbType type="String"><![CDATA[791]]></tbType>
+                <tbProdType type="String"><![CDATA[CHOICE]]></tbProdType>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MRS Janeutelitee Smithsonianand]]></owner>
+                <product type="Product">
+                    <number type="String"><![CDATA[4564727007078296002]]></number>
+                    <type type="String"><![CDATA[VSA]]></type>
+                    <typeIndicator type="String"><![CDATA[C]]></typeIndicator>
+                    <description type="String"><![CDATA[VISA CARD - CHE BANK]]></description>
+                    <unitType type="String"><![CDATA[9]]></unitType>
+                </product>
+                <type type="String" />
+                <limit type="Decimal"><![CDATA[13000.0]]></limit>
+                <balanceAmount type="Decimal"><![CDATA[-8959.14]]></balanceAmount>
+                <balanceSign type="String" />
+                <jointAccountFlag type="String" />
+                <tbType type="String" />
+                <tbProdType type="String" />
+            </item>
+        </accountInternal>
+        <accountExternal type="ExternalProduct[]">
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <type type="String"><![CDATA[Lending/Capital Expenditure]]></type>
+                    <description type="String"><![CDATA[anz]]></description>
+                    <purpose type="String"><![CDATA[Property Lending]]></purpose>
+                </product>
+                <interestRate type="String" />
+                <accountLimit type="Decimal"><![CDATA[168000.0]]></accountLimit>
+                <paymentAmount type="Decimal"><![CDATA[1200.0]]></paymentAmount>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <productSubType type="String"><![CDATA[Personal]]></productSubType>
+                <productSubTypeLIC type="String" />
+                <financialInstitution type="String"><![CDATA[Other]]></financialInstitution>
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <type type="String"><![CDATA[Lending/Capital Expenditure]]></type>
+                    <description type="String"><![CDATA[5.79 fixed 15]]></description>
+                    <purpose type="String"><![CDATA[Property Lending]]></purpose>
+                </product>
+                <interestRate type="String" />
+                <accountLimit type="Decimal"><![CDATA[110000.0]]></accountLimit>
+                <paymentAmount type="Decimal"><![CDATA[666.0]]></paymentAmount>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <productSubType type="String"><![CDATA[Personal]]></productSubType>
+                <productSubTypeLIC type="String" />
+                <financialInstitution type="String" />
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <type type="String"><![CDATA[Lending/Capital Expenditure]]></type>
+                    <description type="String"><![CDATA[io 6.19]]></description>
+                    <purpose type="String"><![CDATA[Property Lending]]></purpose>
+                </product>
+                <interestRate type="String" />
+                <accountLimit type="Decimal"><![CDATA[110000.0]]></accountLimit>
+                <paymentAmount type="Decimal"><![CDATA[580.0]]></paymentAmount>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <productSubType type="String"><![CDATA[Personal]]></productSubType>
+                <productSubTypeLIC type="String" />
+                <financialInstitution type="String" />
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <type type="String"><![CDATA[Lending/Capital Expenditure]]></type>
+                    <description type="String"><![CDATA[fixed 15 - 5.79%]]></description>
+                    <purpose type="String"><![CDATA[Property Lending]]></purpose>
+                </product>
+                <interestRate type="String" />
+                <accountLimit type="Decimal"><![CDATA[130000.0]]></accountLimit>
+                <paymentAmount type="Decimal"><![CDATA[902.0]]></paymentAmount>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <productSubType type="String"><![CDATA[Personal]]></productSubType>
+                <productSubTypeLIC type="String" />
+                <financialInstitution type="String" />
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <type type="String"><![CDATA[Lending/Capital Expenditure]]></type>
+                    <description type="String"><![CDATA[fixed 5.79% till 2015]]></description>
+                    <purpose type="String"><![CDATA[Property Lending]]></purpose>
+                </product>
+                <interestRate type="String" />
+                <accountLimit type="Decimal"><![CDATA[328185.0]]></accountLimit>
+                <paymentAmount type="Decimal"><![CDATA[2277.0]]></paymentAmount>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <productSubType type="String"><![CDATA[Personal]]></productSubType>
+                <productSubTypeLIC type="String" />
+                <financialInstitution type="String" />
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <type type="String"><![CDATA[Lending/Capital Expenditure]]></type>
+                    <description type="String"><![CDATA[woolies]]></description>
+                    <purpose type="String"><![CDATA[Credit Card]]></purpose>
+                </product>
+                <interestRate type="String" />
+                <accountLimit type="Decimal"><![CDATA[8000.0]]></accountLimit>
+                <paymentAmount type="Decimal"><![CDATA[160.0]]></paymentAmount>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <productSubType type="String"><![CDATA[Personal]]></productSubType>
+                <productSubTypeLIC type="String" />
+                <financialInstitution type="String" />
+            </item>
+            <item>
+                <owner type="String"><![CDATA[MR Tomas Smithonsioanas]]></owner>
+                <product type="Product">
+                    <type type="String"><![CDATA[Lending/Capital Expenditure]]></type>
+                    <description type="String"><![CDATA[wpac cc could drop limit if have to]]></description>
+                    <purpose type="String"><![CDATA[Credit Card]]></purpose>
+                </product>
+                <interestRate type="String" />
+                <accountLimit type="Decimal"><![CDATA[13000.0]]></accountLimit>
+                <paymentAmount type="Decimal"><![CDATA[260.0]]></paymentAmount>
+                <balanceAmount type="Decimal"><![CDATA[0.0]]></balanceAmount>
+                <productSubType type="String"><![CDATA[Personal]]></productSubType>
+                <productSubTypeLIC type="String" />
+                <financialInstitution type="String" />
+            </item>
+        </accountExternal>
+    </accounts>
+    <clientAuthorisation type="RequestForInformation[]">
+        <item>
+            <productCategory type="String"><![CDATA[Insurance]]></productCategory>
+            <organisation type="String"><![CDATA[AMP]]></organisation>
+            <organisationOther type="String" />
+            <description type="String"><![CDATA[HOUSING LOAN - Mr Bob The Builder]]></description>
+            <status type="String"><![CDATA[Pending]]></status>
+            <date type="Date"><![CDATA[2014/02/06 00:00:00.0 EST]]></date>
+            <dateStr type="String"><![CDATA[06-02-2014]]></dateStr>
+            <componentValidation type="ComponentValidation">
+                <valid type="Boolean"><![CDATA[false]]></valid>
+                <message type="String" />
+            </componentValidation>
+        </item>
+        <item>
+            <productCategory type="String"><![CDATA[Insurance]]></productCategory>
+            <organisation type="String"><![CDATA[CBA]]></organisation>
+            <organisationOther type="String" />
+            <description type="String"><![CDATA[HOUSING LOAN - Miss Piggy]]></description>
+            <status type="String"><![CDATA[Pending]]></status>
+            <date type="Date"><![CDATA[2014/02/06 00:00:00.0 EST]]></date>
+            <dateStr type="String"><![CDATA[06-02-2014]]></dateStr>
+            <componentValidation type="ComponentValidation">
+                <valid type="Boolean"><![CDATA[false]]></valid>
+                <message type="String" />
+            </componentValidation>
+        </item>
+        <item>
+            <productCategory type="String"><![CDATA[Investment]]></productCategory>
+            <organisation type="String"><![CDATA[AON]]></organisation>
+            <organisationOther type="String" />
+            <description type="String"><![CDATA[WESTPAC - Miss Piggy]]></description>
+            <status type="String"><![CDATA[Pending]]></status>
+            <date type="Date"><![CDATA[2014/02/06 00:00:00.0 EST]]></date>
+            <dateStr type="String"><![CDATA[06-02-2014]]></dateStr>
+            <componentValidation type="ComponentValidation">
+                <valid type="Boolean"><![CDATA[false]]></valid>
+                <message type="String" />
+            </componentValidation>
+        </item>
+        <item>
+            <productCategory type="String"><![CDATA[Investment]]></productCategory>
+            <organisation type="String"><![CDATA[AON]]></organisation>
+            <organisationOther type="String" />
+            <description type="String"><![CDATA[WESTPAC - Mr Bob The Builder]]></description>
+            <status type="String"><![CDATA[Pending]]></status>
+            <date type="Date"><![CDATA[2014/02/06 00:00:00.0 EST]]></date>
+            <dateStr type="String"><![CDATA[06-02-2014]]></dateStr>
+            <componentValidation type="ComponentValidation">
+                <valid type="Boolean"><![CDATA[false]]></valid>
+                <message type="String" />
+            </componentValidation>
+        </item>
+        <item>
+            <productCategory type="String"><![CDATA[Superannuation/Pension]]></productCategory>
+            <organisation type="String"><![CDATA[Bank of Queensland]]></organisation>
+            <organisationOther type="String" />
+            <description type="String"><![CDATA[5.79 FIXED 15 - Mr Bob The Builder]]></description>
+            <status type="String"><![CDATA[Pending]]></status>
+            <date type="Date"><![CDATA[2014/02/06 00:00:00.0 EST]]></date>
+            <dateStr type="String"><![CDATA[06-02-2014]]></dateStr>
+            <componentValidation type="ComponentValidation">
+                <valid type="Boolean"><![CDATA[false]]></valid>
+                <message type="String" />
+            </componentValidation>
+        </item>
+        <item>
+            <productCategory type="String"><![CDATA[Superannuation/Pension]]></productCategory>
+            <organisation type="String"><![CDATA[Bank of Victoria]]></organisation>
+            <organisationOther type="String" />
+            <description type="String"><![CDATA[5.39 FIXED 24 - Miss Piggy]]></description>
+            <status type="String"><![CDATA[Pending]]></status>
+            <date type="Date"><![CDATA[2014/02/06 00:00:00.0 EST]]></date>
+            <dateStr type="String"><![CDATA[06-02-2014]]></dateStr>
+            <componentValidation type="ComponentValidation">
+                <valid type="Boolean"><![CDATA[false]]></valid>
+                <message type="String" />
+            </componentValidation>
+        </item>
+    </clientAuthorisation>
+    <manualChecklist type="ChecklistItem[]">
+        <item>
+            <id type="Integer"><![CDATA[79]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm customer details are complete in CRM (RB, Firefly) e.g. calendar is up to date]]></descriptionForUser>
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:04:28 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Confirm Advice Requirements]]></processStep>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[57]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm customer file for initial discovery has been prepared (e.g. Personal details, statements)]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:05:38 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare for Discovery]]></processStep>
+            <validValues type="String"><![CDATA[Yes]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[58]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm the appointment is in the planner's diary (for meeting and preparation)]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:05:38 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare for Discovery]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[96]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm you have uploaded and emailed and/or posted requested reports to the planner]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:05:38 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare for Discovery]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[59]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm you have printed/collated all meeting documents]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:10:31 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare to Conduct Discovery]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[75]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm customer contact details have been updated in all relevant systems (e.g. RB, Firefly, COIN, ANG etc)]]></descriptionForUser>
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:12:46 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Conduct Discovery]]></processStep>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[85]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm all 3rd party authorities have been uploaded/posted]]></descriptionForUser>
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:12:46 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Conduct Discovery]]></processStep>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[130]]></id>
+            <descriptionForUser type="String"><![CDATA[Does the customer have a completed and signed CPB?]]></descriptionForUser>
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:12:46 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Conduct Discovery]]></processStep>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[62]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm whether you are a business planner]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes,No]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[83]]></id>
+            <descriptionForUser type="String"><![CDATA[Are all products on the Approved Product List? All approvals need to be uploaded into sharepoint.]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes,No]]></validValues>
+            <relatedDocuments type="String"><![CDATA[35]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[No]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[98]]></id>
+            <descriptionForUser type="String"><![CDATA[Has the latest FSG been issued to the customer?]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[1]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[Yes]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[95]]></id>
+            <descriptionForUser type="String"><![CDATA[Is the primary account holder a High Net Worth customer?]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes,No]]></validValues>
+            <relatedDocuments type="String"><![CDATA[37]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[Yes]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[87]]></id>
+            <descriptionForUser type="String"><![CDATA[Do you want to upload your own discovery map for paraplanning etc?]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes,No]]></validValues>
+            <relatedDocuments type="String"><![CDATA[44]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[Yes]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[88]]></id>
+            <descriptionForUser type="String"><![CDATA[Is this advice request marked as urgent?]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes,No]]></validValues>
+            <relatedDocuments type="String"><![CDATA[45]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[Yes]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[121]]></id>
+            <descriptionForUser type="String"><![CDATA[Have you completed a 'Determining Your Investment Risk Profile' booklet for the client?]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes, N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[79]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[Yes]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[93]]></id>
+            <descriptionForUser type="String"><![CDATA[Is the primary account holder an overseas customer?]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:23:01 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Create Advice Strategies]]></processStep>
+            <validValues type="String"><![CDATA[Yes,No]]></validValues>
+            <relatedDocuments type="String"><![CDATA[32,33]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[Yes,Yes]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[66]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm the plan presentation meeting has been booked]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:36:10 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Review Advice Document]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[124]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm a copy of the advice document has been uploaded]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:37:26 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare for Advice Meeting]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[101]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm all 'sign-here' labels have been applied to all relevant documents]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:37:26 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare for Advice Meeting]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[58]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm the appointment is in the planner's diary (for meeting and preparation)]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:37:26 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare for Advice Meeting]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+        <item>
+            <id type="Integer"><![CDATA[68]]></id>
+            <descriptionForUser type="String"><![CDATA[Confirm all required documents have been received/printed for the meeting]]></descriptionForUser>
+            <instructionText type="String" />
+            <completedBy type="String"><![CDATA[Che Man (L053247)]]></completedBy>
+            <completedDate type="String"><![CDATA[Tue Feb 04 14:38:54 EST 2014]]></completedDate>
+            <result type="String"><![CDATA[Yes]]></result>
+            <processStep type="String"><![CDATA[Prepare to Present the SoA]]></processStep>
+            <validValues type="String"><![CDATA[Yes,N/A]]></validValues>
+            <relatedDocuments type="String"><![CDATA[0]]></relatedDocuments>
+            <relatedDocumentsValues type="String"><![CDATA[0]]></relatedDocumentsValues>
+        </item>
+    </manualChecklist>
+    <meetingPack type="MeetingPack[]" />
+    <superannuation type="InitialAdviceSuperannuation">
+        <superannuationDetails type="SuperannuationDetails[]" />
+        <previousContributions type="PreviousContributions">
+            <currentFinancialYear type="CurrentFinancialYearFund[]" />
+            <previousTwoFinancialYear type="PreviousTwoFinancialYear[]" />
+        </previousContributions>
+        <incomeStreamDetails type="IncomeStreamDetails[]" />
+        <redundancyEarlyRetirementPayments type="RedundancyEarlyRetirementPayments[]" />
+    </superannuation>
+    <initialMeetingOutcome type="InitialMeetingOutcome">
+        <outcome type="String"><![CDATA[Proceed with Advice]]></outcome>
+        <comments type="String"><![CDATA[1]]></comments>
+        <rejectReason type="String"><![CDATA[Customer does not want to proceed]]></rejectReason>
+        <rejectReasonOther type="String"><![CDATA[1]]></rejectReasonOther>
+    </initialMeetingOutcome>
+    <reviewAdviceComments type="ReviewAdviceComments" />
+    <serviceRequest type="ServiceRequest">
+        <caseStatus type="String"><![CDATA[INPROGRESS]]></caseStatus>
+    </serviceRequest>
+    <businessData type="BusinessData">
+        <primaryCustomerId type="String"><![CDATA[77760110072]]></primaryCustomerId>
+        <primaryCustomerFirstName type="String"><![CDATA[Tomas]]></primaryCustomerFirstName>
+        <primaryCustomerLastName type="String"><![CDATA[Smithonsioanas]]></primaryCustomerLastName>
+        <processType type="String"><![CDATA[Standard]]></processType>
+        <assignedTo type="String"><![CDATA[NSWPATEAM1]]></assignedTo>
+        <plannerName type="String"><![CDATA[Che Man (L053247)]]></plannerName>
+        <customerName type="String"><![CDATA[Tomas Smithonsioanas (77760110072)]]></customerName>
+        <pendedById type="String" />
+        <pendedByName type="String" />
+        <pendedSubject type="String" />
+        <logicalStartDate type="Date"><![CDATA[2014/02/04 14:41:01.347 EST]]></logicalStartDate>
+        <paraplanningStreamType type="String"><![CDATA[Complex]]></paraplanningStreamType>
+    </businessData>
+    <adviceType type="String"><![CDATA[Opportunity]]></adviceType>
+    <processType type="String"><![CDATA[Standard]]></processType>
+    <paraplanningDocumentType type="String"><![CDATA[5]]></paraplanningDocumentType>
+    <urgentDueDateString type="String"><![CDATA[04-02-2014]]></urgentDueDateString>
+    <fnGroupId type="String"><![CDATA[d347884d-205c-47f0-b592-02ca190ce7e0]]></fnGroupId>
+    <source type="String"><![CDATA[CRM]]></source>
+    <isStaffMember type="Boolean"><![CDATA[false]]></isStaffMember>
+    <isHighNetWorth type="Boolean"><![CDATA[false]]></isHighNetWorth>
+    <isOverseasCustomer type="Boolean"><![CDATA[false]]></isOverseasCustomer>
+    <createdDate type="Date"><![CDATA[2014/02/04 13:55:21.717 EST]]></createdDate>
+    <completedDate type="Date"><![CDATA[2014/02/04 14:42:20.371 EST]]></completedDate>
+    <caseStatus type="String"><![CDATA[Active]]></caseStatus>
+    <urgentFlag type="Boolean"><![CDATA[false]]></urgentFlag>
+    <processInstanceID type="String"><![CDATA[61910]]></processInstanceID>
+</variable>
