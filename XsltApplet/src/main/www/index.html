@@ -14,16 +14,27 @@ $(document).ready(function(){
     //update()
     if (typeof console !== 'undefined'){ console.log('loaded.') }
 })
-function update(){
-    var xml = $('#xml').val(), xsl = $('#xsl').val()
-    var result = typeof(document.XsltApplet.transform) !== 'undefined' ? document.XsltApplet.transform(xml, xsl) : APPLET_FAILED
-    var errors = typeof(document.XsltApplet.getErrorMessages) !== 'undefined' ? document.XsltApplet.getErrorMessages() : APPLET_FAILED
-    $('#result').val(result)
-    $('#errors').val(errors)
-    showWindow(result)
+function version(version){
+    $('#version').html(version)
+}
+function log(message){
+    if (typeof console !== 'undefined'){ console.log(message) }
+    var newMessage = "" + message + "\n" + $('#result').val()
+    $('#result').val(newMessage).addClass('error')
+}
+function update(showWindowFlag){
+    $('#result').val('').removeClass('error').stop( true, true ).animate({backgroundColor: "#C0C0C0" }, 200)
+    var result = typeof(document.XsltApplet.transform) !== 'undefined' ? document.XsltApplet.transform($('#xml').val(), $('#xsl').val()) : APPLET_FAILED
+    $('#result').stop( true, true ).animate({backgroundColor: "#FFF" }, 200)
+    if (result != ''){ $('#result').val(result) } // otherwise blank results will just overwrite any error logs.
+    if (showWindowFlag == true || !windowIsClosed()){ showWindow(result) }
+    //saveContent()
+}
+function windowIsClosed(){
+    return popupWindow == null || popupWindow.closed
 }
 function showWindow(result){
-    if (popupWindow == null || popupWindow.closed){
+    if (windowIsClosed()){
         popupWindow = window.open("","_blank","width=600,height=400,location=no,menubar=yes,resizable=yes,scrollbars=yes,status=yes,titlebar=yes")
         popupWindow.document.write(result)
         popupWindow.document.close()
@@ -52,6 +63,7 @@ function loadContent(){
     }
 }
 function init(){
+    // set default values
     $('#xml').val('<a><b>test</b></a>')
     $('#xsl').get(0).value = ("<xsl:stylesheet version='2.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>\r\n" +
             "    <xsl:output method='xml' version='1.0' encoding='utf-8' indent='yes'/>\r\n" +
@@ -59,17 +71,27 @@ function init(){
             "        <b><xsl:value-of select='//b' /></b>\r\n" +
             "    </xsl:template>\r\n" +
             "</xsl:stylesheet>")
+    // setup key listener (timer)
     var timer = new DelayedTimer( update )
-    $('#xml,#xsl').keyup( timer.start )
-    $('#version').html( typeof(document.XsltApplet.version) !== 'undefined' ? document.XsltApplet.version() : APPLET_FAILED)
-    $('table tr:nth-child(3) td:first-child,table tr:nth-child(5) td:first-child').resizable({handles:'se,s,e', minWidth:100, minHeight:100})
+    $('#xml,#xsl').keyup( function(e){
+        e = e || window.event
+        // ignore shift, ctrl, alt, etc and direction (up, down, left, right) keys.
+        if (e.keyCode < 16 || 20 < e.keyCode && e.keyCode < 37 || 40 < e.keyCode){
+            timer.start()
+        }
+    })
+    // setup resizable windows
+    $('table tr:nth-child(3) td,table tr:nth-child(5) td').resizable({handles:'s', minWidth:100, minHeight:100})
+    // add onclick handler for render window
     $('#renderInWindow input').click(function(evt){
         if($(this).is(':checked')){
-            update() // -> showWindow()
+            update(true) // -> showWindow()
         } else {
             hideWindow()
         }
     })
+    $('#xml').focus()
+    //loadContent()
 }
 function DelayedTimer(callback, delay) {
     delay = delay || 300
@@ -82,37 +104,36 @@ function DelayedTimer(callback, delay) {
 }
     </script>
     <style>
-* {padding:0px;margin:0px;}
-html,body{height:100%;width:100%;}
+*,html,body,table{padding:0px;margin:0px;}
+html,body{height:100%;width:100%;overflow-y:auto;}
 table,tr,td,th{border:1px solid grey;}
 table{width:100%;height:100%;}
-th{text-transform:capitalize;text-align:center;background:lightgray;height:1%;line-height:30px;}
-#xml,#xsl,#result,#errors{width:100%;height:100%;overflow:auto;display:block;}
-#renderInWindow{float:right;margin:4px 4px 0px 0px;font-weight:normal;}
+th{text-transform:capitalize;text-align:left;background:lightgray;height:21px;line-height:20px;font-family:sans-serif;padding:0px 5px;}
+textarea{border-width:0px;padding:0px 2px;resize:none;}
+#xml,#xsl,#result{width:100%;height:100%;overflow:auto;display:block;}
+#renderInWindow{float:right;font-weight:normal;font-size:12px;}
+#renderInWindow input[type=checkbox] {top:2px;position:relative;}
+.error{color:red;}
     </style>
 </head>
 <body>
     <table>
-        <tr>
-            <th colspan="2">Version: <span id='version'>-</span></th>
-        </tr>
-        <tr>
-            <th>xml</th>
-            <th>xsl</th>
-        </tr>
-        <tr>
-            <td><textarea id='xml'></textarea></td>
-            <td><textarea id='xsl'></textarea></td>
-        </tr>
-        <tr>
-            <th><span id='renderInWindow'><label>render in window: </label><input type='checkbox' /></span>result</th>
-            <th>errors</th>
-        </tr>
-        <tr>
-            <td><textarea id='result'></textarea></td>
-            <td><textarea id='errors'></textarea></td>
-        </tr>
+        <tr><th>Version: <span id='version'>-</span>
+        <applet name='@mainClass@'
+                code="@mainClass@.class"
+                archive='@jarResourcesFolderName@/@distFileName@.jar?version=@UID@'
+                width='0'
+                height='0'
+                classloader_cache="false"
+                separate_jvm="true"
+                MAYSCRIPT></applet>
+        </th></tr>
+        <tr><th>xml</th></tr>
+        <tr><td><textarea id='xml'></textarea></td></tr>
+        <tr><th>xsl</th></tr>
+        <tr><td><textarea id='xsl'></textarea></td></tr>
+        <tr><th><span id='renderInWindow'><label>render in window: </label><input type='checkbox' /></span>result</th></tr>
+        <tr><td><textarea id='result'></textarea></td></tr>
     </table>
-    <applet name='@mainClass@' code="@mainClass@.class" archive='@jarResourcesFolderName@/@distFileName@.jar?version=@UID@' width='0' height='0'></applet>
 </body>
 </html>

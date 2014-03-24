@@ -1,3 +1,5 @@
+import logging.JsLogger;
+import logging.SystemLogger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -11,13 +13,13 @@ public class XsltFileTest {
 
     @BeforeClass
     public static void init(){
-        Xslt2.init();
+        Xslt2.init(new JsLogger(null, "log"));
     }
 
     @Test
     public void testRequestSummary(){
-        String result = Xslt2.transform(new File(RESOURCES, "requestSummary.xml"),
-                new File(RESOURCES, "requestSummary.xsl"));
+        String result = Xslt2.transform(new File(RESOURCES, "source1.xml"),
+                new File(RESOURCES, "source3.xsl"));
         assertEquals("", result);
     }
 }

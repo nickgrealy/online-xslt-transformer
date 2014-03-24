@@ -1,9 +1,9 @@
-import javax.xml.transform.ErrorListener;
+import logging.Logger;
+import logging.SystemLogger;
+
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
-import java.applet.Applet;
 import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -18,19 +18,18 @@ public class Xslt2 {
     public static final String NORMAL_WHITESPACE = " ";     // this IS your average whitespace!
 
     private static TransformerFactory factory;
-    private static Listener errorListener;
-    private static StringBuffer errorMessages = new StringBuffer();
+    private static Logger errorListener;
 
     public static void main(String[] args) throws Throwable {
-        init();
+        init(new SystemLogger());
         String result = transform(new File(args[0]), new File(args[1]));
         System.out.println(result);
     }
 
-    public static void init() {
+    public static void init(Logger logger) {
         if (factory == null){
             factory = new net.sf.saxon.TransformerFactoryImpl();
-            errorListener = new Listener(errorMessages);
+            errorListener = logger;
             factory.setErrorListener(errorListener);
         }
     }
@@ -63,7 +62,6 @@ public class Xslt2 {
     }
 
     private static String transform(StreamSource xml, StreamSource xsl){
-        init();
         String result = "";
         try {
             // do transform
@@ -73,36 +71,8 @@ public class Xslt2 {
             result = writer.toString();
         } catch (Exception e) {
             // handle errors gracefully
-            errorMessages.append("TRANSFORM_ERROR: " + e.getMessage() + "\n");
+            errorListener.log(Logger.Level.ERROR, e.getMessage());
         }
         return result;
-    }
-
-    public static String getErrorMessages() {
-        String tmp = errorMessages.toString();
-        errorMessages = new StringBuffer();
-        return tmp;
-    }
-
-    public static class Listener implements ErrorListener {
-
-        private StringBuffer messages;
-
-        Listener(StringBuffer messages) {
-            this.messages = messages;
-        }
-
-        public void warning(TransformerException exception) throws TransformerException {
-            messages.append("WARN: " + exception.getMessageAndLocation() + "\n");
-        }
-
-        public void error(TransformerException exception) throws TransformerException {
-            messages.append("ERROR: " + exception.getMessageAndLocation() + "\n");
-        }
-
-        public void fatalError(TransformerException exception) throws TransformerException {
-            messages.append("FATAL: " + exception.getMessageAndLocation() + "\n");
-        }
-
     }
 }
