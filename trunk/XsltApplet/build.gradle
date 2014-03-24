@@ -1,19 +1,31 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 
+/*
+TODO Can not verify self-signed Deployment Rule Set jar
+*/
+
 apply plugin: 'java'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.5
 version = '1.0'
 
 repositories {
     mavenCentral()
 }
 
+compileJava {
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+//    options.bootClasspath = "${System.getProperty('JAVA6_HOME')}/jre/lib/rt.jar"
+}
+
+
+def javaHome = System.getProperty("java.home")
 dependencies {
     testCompile 'junit:junit:4.11'
     compile 'net.sf.saxon:Saxon-B:9.0'
+    compile files("$javaHome/lib/plugin.jar")
 }
 
 ext {
@@ -70,12 +82,16 @@ def initKeyStore() {
     exportPublicKey()
 }
 def exportPublicKey() {
-    // generate a keystore if it doesn't already exist...
+    // generate a public certificate if it doesn't already exist...
     def publicCer = file('certs/public.cer')
     if (!publicCer.exists()){
         logger.info('>> Generating certificate.')
         ant.mkdir(dir:'certs')
         assert keytool.exists(), "keytool could not be found under - '$keytool'"
+        exec {
+            executable = keytool
+            args = (List)"-export -keystore certs/keystore.jks -alias server -storepass password -keypass password -file $publicCer".split(/ /)
+        }
         exec {
             executable = keytool
             args = (List)"-export -keystore certs/keystore.jks -alias server -storepass password -keypass password -file $publicCer".split(/ /)
@@ -104,15 +120,34 @@ def signjar(jarpath, updateManifest = false){
         }
     }
     // sign jar
+    def jarFile = file(jarpath)
+    def signedJarFile = new File("$buildDir/$signedResourcesFolderName", jarFile.name)
+    def certFile = new File(signedJarFile.parent, signedJarFile.name + "_cert.txt")
+    
     logger.info(">>> Signing jar - '$jarpath'")
-    ant.mkdir(dir: "$buildDir/$signedResourcesFolderName")
-    ant.signjar(destDir: "$buildDir/$signedResourcesFolderName",
+    ant.mkdir(dir: signedJarFile.parent)
+    ant.signjar(destDir: signedJarFile.parent,
             jar: jarpath,
             alias: 'server',
             storetype:"jks",
             keystore:"certs/keystore.jks",
             storepass:"password",
             preservelastmodified:"true")
+    
+    assert keytool.exists(), "keytool could not be found under - '$keytool'"
+    def params = "-printcert -jarfile $signedJarFile"
+    new ByteArrayOutputStream().withStream { os ->
+        exec {
+            executable = keytool
+            args = (List)params.split(/ /)
+            standardOutput = os
+        }
+        def matches = os.toString() =~ /SHA256:\s([^\s]+)/
+        def sha256 = matches[0][1].replaceAll(":", "")
+        println "SHA256: $sha256"
+        //certFile.delete()
+        //certFile << os.toString()
+    }
 }
 
 task downloadJqueryUICss(type: Downloader) {
@@ -131,6 +166,11 @@ task downloadJquery(type: Downloader) {
 }
 
 task copyResources(type: Copy) {
+    from 'certs/public.cer'
+    into 'src/main/dist'
+}
+
+task copyWebResources(type: Copy) {
     from 'src/main/www'
     into 'src/main/dist'
     filter(ReplaceTokens, tokens: [
@@ -165,6 +205,7 @@ dist.dependsOn downloadJquery
 dist.dependsOn downloadJqueryUI
 dist.dependsOn downloadJqueryUICss
 dist.dependsOn copyResources
+dist.dependsOn copyWebResources
 dist.dependsOn copyRuntimeDependencies
 
 task unzip(type: Copy) {

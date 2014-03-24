@@ -1,2 +1,2 @@
 @echo off
-java -cp libs/* Xslt2 "%1" "%2"
+java -cp "libs/*" Xslt2 "%1" "%2"
